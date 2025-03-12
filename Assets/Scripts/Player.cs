@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     public GameObject gameOverUI;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI totalScoreText;
+    public Vector2 movement;
+
 
 
     private void Awake()
@@ -60,17 +62,28 @@ public class Player : MonoBehaviour
             transform.localScale = new Vector3(8f, 8f, 8f); 
         }
 
+
+       
     }
 
+    private void FixedUpdate()
+    {
+        IsMoving();
 
-    private void FixedUpdate() 
+        
+    }
+
+    public bool IsMoving() 
     {
         moveInput = moveAction.ReadValue<Vector2>();
 
         Vector2 movement = moveInput.normalized * moveSpeed;
 
         rb.linearVelocity = movement;
-  
+
+        return isMoving;
+
+
     }
 
     private void UpdateScoreText()

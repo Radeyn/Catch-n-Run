@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class EnemyCollision : MonoBehaviour
 {
     private Player player;
     private Rigidbody2D rb;
-    private Animator animator;
+    private bool damageTaken;
+    
 
     private void Start()
     {
@@ -14,12 +16,10 @@ public class EnemyCollision : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-  
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    public bool DamageTaken(Collision2D collision)
     {
-        float playerHealth = player.playerHealth;
-
 
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -27,18 +27,14 @@ public class EnemyCollision : MonoBehaviour
             player.animator.SetTrigger("GetHit");
 
             player.playerHealth--;
-
             Destroy(gameObject);
+
 
             Debug.Log("Player Health: " + player.playerHealth);
 
-            
-
+            return true;
         }
-    }
 
-    public void DestroyEnemy()
-    {
-        DestroyImmediate(gameObject);
+        return false;
     }
 }
