@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 public class Player : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private PlayerInput playerInput;
     private InputAction moveAction;
     private bool isMoving;
