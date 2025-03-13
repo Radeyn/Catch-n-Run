@@ -5,10 +5,10 @@ using UnityEngine;
 public class SpawnScript : MonoBehaviour
 {
     private Rigidbody2D rb;
-    public Transform[] spawnPoints; // Burayı public yapıyoruz
+    public Transform[] spawnPointsFruit; // Burayı public yapıyoruz
+    public Transform[] spawnPointsEnemy; // Burayı public yapıyoruz
     public GameObject[] fruitPrefabs;
     public GameObject[] enemyPrefabs;
-    public float spawnInterval = 0.5f;
     private int startTimer = 3;
     public float minSpawnInterval = 0.3f; // Minumum spawn aralığı
     public float maxSpawnInterval = 1.5f; // Maximum spawn aralığı
@@ -43,14 +43,15 @@ public class SpawnScript : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
 
 
-            int randomIndex = Random.Range(0, spawnPoints.Length);
+            int randomIndexFruit = Random.Range(0, spawnPointsFruit.Length);
+            int randomIndexEnemy = Random.Range(0, spawnPointsEnemy.Length);
             int randomFruit = Random.Range(0, fruitPrefabs.Length);
             int randomEnemy = Random.Range(0, enemyPrefabs.Length);
 
-            GameObject fruit = Instantiate(fruitPrefabs[randomFruit], spawnPoints[randomIndex].position, Quaternion.identity);
+            GameObject fruit = Instantiate(fruitPrefabs[randomFruit], spawnPointsFruit[randomIndexFruit].position, Quaternion.identity);
             spawnedFruits.Add(fruit);
 
-            GameObject enemy = Instantiate(enemyPrefabs[randomEnemy], spawnPoints[randomIndex].position, Quaternion.identity);
+            GameObject enemy = Instantiate(enemyPrefabs[randomEnemy], spawnPointsEnemy[randomIndexEnemy].position, Quaternion.identity);
             spawnedEnemies.Add(enemy);
 
 

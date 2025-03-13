@@ -46,7 +46,7 @@ public class ResetGameScript : MonoBehaviour
 
         heartAnimator.StopAllCoroutines();
         spawnScript.StopAllCoroutines();
-
+        spawnScript.maxSpawnInterval = 1.5f;
         heartAnimator.ResetAnimation();
       
         player.score = 0;

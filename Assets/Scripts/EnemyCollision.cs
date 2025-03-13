@@ -1,25 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
+using UnityEngine.Audio;
 
 public class EnemyCollision : MonoBehaviour
 {
     private Player player;
-    private Rigidbody2D rb;
-    private bool damageTaken;
-    
+    public Rigidbody2D rb;
+    public AudioSource audioSource;
+
 
     private void Start()
+         {
+            player = FindAnyObjectByType<Player>();
+            rb = GetComponent<Rigidbody2D>();
+            audioSource = GetComponent<AudioSource>();
+
+         }
+
+   
+
+        public void OnCollisionEnter2D(Collision2D collision)
     {
-        player = FindAnyObjectByType<Player>();
-        rb = GetComponent<Rigidbody2D>();
-    }
 
 
-
-    public bool DamageTaken(Collision2D collision)
-    {
 
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -27,14 +29,17 @@ public class EnemyCollision : MonoBehaviour
             player.animator.SetTrigger("GetHit");
 
             player.playerHealth--;
-            Destroy(gameObject);
+
 
 
             Debug.Log("Player Health: " + player.playerHealth);
 
-            return true;
         }
+        audioSource.Play();
+        
+        Destroy(gameObject, 1f);
 
-        return false;
+
+
     }
 }
