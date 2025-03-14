@@ -9,13 +9,13 @@ public class Player : MonoBehaviour
     private bool isMoving;
     public Animator animator;
     public float playerHealth;
-    private Vector2 moveInput;
+    public Vector2 moveInput;
     public float moveSpeed = 5f;
     public int score;
     public GameObject gameOverUI;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI totalScoreText;
-    public Vector2 movement;
+    private Vector2 movement;
 
 
 
@@ -69,8 +69,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         IsMoving();
-
-        
+      
     }
 
     public bool IsMoving() 

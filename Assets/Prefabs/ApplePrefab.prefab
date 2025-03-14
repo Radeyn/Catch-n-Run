@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7163029356748421886}
   - component: {fileID: -6947012068607245335}
   - component: {fileID: -65062479957200616}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ApplePrefab
   m_TagString: Fruit
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 7304155038033224295}
   - component: {fileID: 7564825779707622665}
   - component: {fileID: 6204155516631979876}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Apple
   m_TagString: Untagged
   m_Icon: {fileID: 0}

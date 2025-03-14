@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class HeartAnimator : MonoBehaviour
+public class GameOver : MonoBehaviour
 {
     private Animator firstHeartAnimator;
     private Animator secondHeartAnimator;
     private Animator thirdHeartAnimator;
     private Animator lastHeartAnimator;
     private Player player;
+    private SoundDead soundDead;
 
     public GameObject firstHeart;
     public GameObject secondHeart;
@@ -17,11 +18,14 @@ public class HeartAnimator : MonoBehaviour
 
     void Start()
     {
+
         // Kalplerin animator bileşenlerini al
         if (firstHeart) firstHeartAnimator = firstHeart.GetComponent<Animator>();
         if (secondHeart) secondHeartAnimator = secondHeart.GetComponent<Animator>();
         if (thirdHeart) thirdHeartAnimator = thirdHeart.GetComponent<Animator>();
         if (lastHeart) lastHeartAnimator = lastHeart.GetComponent<Animator>();
+
+        soundDead = FindAnyObjectByType<SoundDead>();
 
         // Oyuncuyu bul
         player = FindAnyObjectByType<Player>();
@@ -66,31 +70,33 @@ public class HeartAnimator : MonoBehaviour
         if (playerHealth < 1)
         {
             lastHeartAnimator.SetBool("HeartEmpty", true);
+
+
             StartCoroutine(GameOverSequence());
 
         }
         else 
         { 
-             lastHeartAnimator.SetBool("HeartEmpty", false);
+            lastHeartAnimator.SetBool("HeartEmpty", false);
         }
         }
 
         IEnumerator GameOverSequence()
         {
-          
             
 
-           // // Animasyonun süresini al
+            soundDead.IsDead();
+
             float animTime = lastHeartAnimator.GetCurrentAnimatorStateInfo(0).length;
 
-            yield return new WaitForSeconds(animTime); // Animasyon bitene kadar bekle
+            yield return new WaitForSecondsRealtime(animTime); //
 
 
 
-            Time.timeScale = 0; // Oyunu durdur
-            gameOverUI.SetActive(true); // Game Over UI aç
+            Time.timeScale = 0; 
+            gameOverUI.SetActive(true); 
 
-   }
+        }
     public void ResetAnimation()
     {
 

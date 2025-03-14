@@ -16,7 +16,6 @@ public class PlayAgainButton : MonoBehaviour
     public void OnClick()
     {
         resetGameScript.ResetGame();
-        
 
     }
 }
