@@ -1,27 +1,23 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ResetGameScript : MonoBehaviour
 {
 
-    public Player player;
+    private Player player;
+    private GameOver gameOver;
+    private FruitCollision fruitCollision;
+    private EnemyCollision enemyCollision;
+    private SpawnScript spawnScript;
+    private  StartCountdown startCountdown;
+
     public GameObject gameOverUI;
 
-    public HeartAnimator heartAnimator;
-    public FruitCollision fruitCollision;
-    public EnemyCollision enemyCollision;
-    public SpawnScript spawnScript;
-    public StartCountdown startCountdown;
-    
     private void Start()
     {
         spawnScript = FindAnyObjectByType<SpawnScript>();
         startCountdown = FindAnyObjectByType<StartCountdown>();
-    }
-
-    private void Update()
-    {
-        
+        gameOver = FindAnyObjectByType<GameOver>();
+        player = FindAnyObjectByType<Player>();
     }
 
     public void ResetGame()
@@ -35,25 +31,26 @@ public class ResetGameScript : MonoBehaviour
         }
         spawnScript.spawnedEnemies.Clear();
 
-
-        
         foreach (GameObject fruit in spawnScript.spawnedFruits)
         {
             if (fruit != null)
                 Destroy(fruit);
-        }
+        }   
         spawnScript.spawnedFruits.Clear();
 
-        heartAnimator.StopAllCoroutines();
+
         spawnScript.StopAllCoroutines();
+        gameOver.StopAllCoroutines();
+
+        
         spawnScript.maxSpawnInterval = 1.5f;
-        heartAnimator.ResetAnimation();
-      
+        gameOver.ResetAnimation();
+
+
         player.score = 0;
         player.playerHealth = 4;
         player.moveSpeed = 25;
         player.transform.position = new Vector3(0, 1.20f, 0f);
-        player.transform.localScale = new Vector3(8, 8, 8);
         
         gameOverUI.SetActive(false);
         

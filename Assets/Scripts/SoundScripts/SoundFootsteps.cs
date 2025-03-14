@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class footsteps : MonoBehaviour
+public class SoundFootsteps : MonoBehaviour
 {
     public AudioSource footstepsSound;
     private Player player;
@@ -10,7 +8,7 @@ public class footsteps : MonoBehaviour
 
     private void Start()
     {
-        player = GetComponent<Player>();
+        player = FindAnyObjectByType<Player>();
     }
 
     private void Update()

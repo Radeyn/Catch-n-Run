@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class PlayerTransform : MonoBehaviour
+public class GameDiffucilty : MonoBehaviour
 {
-    public Player player;
+    private Player player;
     private Rigidbody2D rb;
-    public SpawnScript spawnScript;
-    public EnemyCollision enemyCollision;
-
+    private SpawnScript spawnScript;
+    private EnemyCollision enemyCollision;
+    private Vector2 moveInput;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -17,55 +17,85 @@ public class PlayerTransform : MonoBehaviour
 
     private void Update()
     {
-        float score = player.score;
-       
+        int score = player.score;
 
-        switch (score) 
+
+
+        switch (score)
         {
-            case 5:
+            case int s when s >= 0 && s < 5:
 
-                UpdatePlayer(22.5f, 8.25f);
+                UpdatePlayer(25f, 8f);
+                UpdateObjectSpawn(1.5f);
+                spawnScript.UpdateSpikeGravity(1f);
+                
+                break;
+
+            case int s when s > 5 && s < 10:
+
+                UpdatePlayer(22.5f, 8.50f);
                 UpdateObjectSpawn(1.2f);
-                //UpdateSpikeMass
+                spawnScript.UpdateSpikeGravity(2f);
                 break;
 
-            case 10:
-                UpdatePlayer(20f, 8.50f);
+            case int s when s > 10 && s < 15:
+                UpdatePlayer(20f, 9f);
                 UpdateObjectSpawn(1f);
-                break;
-
-            case 15:
-                UpdatePlayer(17.5f, 8.75f);
-                UpdateObjectSpawn(0.9f);
-                break;
-
-            case 20:
-                UpdatePlayer(15f, 9f);
-                UpdateObjectSpawn(0.8f);
+                spawnScript.UpdateSpikeGravity(3f);
 
                 break;
 
-            case 25:
-                UpdatePlayer(12.5f, 9.25f);
+            case int s when s > 15 && s < 20:
+                UpdatePlayer(18.5f, 9.50f);
                 UpdateObjectSpawn(0.7f);
-
+                spawnScript.UpdateSpikeGravity(4f);
                 break;
 
-            case 30:
-                UpdatePlayer(10f, 9.50f);
+            case int s when s > 25 && s < 30:
+                UpdatePlayer(16f, 10f);
                 UpdateObjectSpawn(0.6f);
+                spawnScript.UpdateSpikeGravity(5f);
 
                 break;
 
-            case 35:
-                UpdatePlayer(9.5f, 9.75f);
+            case int s when s > 35 && s < 40:
+                UpdatePlayer(14.5f, 10.5f);
                 UpdateObjectSpawn(0.5f);
+                spawnScript.UpdateSpikeGravity(6f);
 
                 break;
 
-            case 40:
-                UpdatePlayer(9f, 10f);
+            case int s when s > 40 && s < 45:
+                UpdatePlayer(13f, 11f);
                 UpdateObjectSpawn(0.4f);
+                spawnScript.UpdateSpikeGravity(7f);
+
+                break;
+
+            case int s when s > 45 && s < 50:
+                UpdatePlayer(11.5f, 11.5f);
+                UpdateObjectSpawn(0.3f);
+                spawnScript.UpdateSpikeGravity(8f);
+
+                break;
+
+            case int s when s > 50 && s < 55:
+                UpdatePlayer(10f, 12f);
+                UpdateObjectSpawn(0.2f);
+                spawnScript.UpdateSpikeGravity(9f);
+
+                break;
+            case int s when s > 55 && s <= 60:
+                UpdatePlayer(9f, 12f);
+                UpdateObjectSpawn(0.1f);
+                spawnScript.UpdateSpikeGravity(10f);
+
+                break;
+            
+                case >=60:
+                UpdatePlayer(9f, 12f);
+                UpdateObjectSpawn(0.1f);
+                spawnScript.UpdateSpikeGravity(10f);
 
                 break;
 
@@ -75,8 +105,19 @@ public class PlayerTransform : MonoBehaviour
 
     private void UpdatePlayer(float speed, float scaleX)
     {
+        player.moveInput = moveInput;
+
+        if (moveInput.x < 0)
+        {
+            transform.localScale = new Vector3(-scaleX, 8f, 8f);
+        }
+        else if (moveInput.x > 0)
+        {
+            transform.localScale = new Vector3(scaleX, 8f, 8f);
+        }
+
         player.moveSpeed = speed;
-        player.transform.localScale = new Vector3(scaleX, 8, 8);
+        
     }
 
     private void UpdateObjectSpawn(float maxSpawnInterval)
@@ -87,14 +128,6 @@ public class PlayerTransform : MonoBehaviour
 
     }
 
-    private void UpdateSpikeMass(Rigidbody2D mass)
-    {
-        enemyCollision.rb.mass =  rb.mass;
-
-    }
-
-
-
-
+ 
 
 }
