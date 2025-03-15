@@ -8,7 +8,6 @@ public class GameOver : MonoBehaviour
     private Animator thirdHeartAnimator;
     private Animator lastHeartAnimator;
     private Player player;
-    private SoundDead soundDead;
 
     public GameObject firstHeart;
     public GameObject secondHeart;
@@ -25,7 +24,6 @@ public class GameOver : MonoBehaviour
         if (thirdHeart) thirdHeartAnimator = thirdHeart.GetComponent<Animator>();
         if (lastHeart) lastHeartAnimator = lastHeart.GetComponent<Animator>();
 
-        soundDead = FindAnyObjectByType<SoundDead>();
 
         // Oyuncuyu bul
         player = FindAnyObjectByType<Player>();
@@ -85,7 +83,7 @@ public class GameOver : MonoBehaviour
         {
             
 
-            soundDead.IsDead();
+            
 
             float animTime = lastHeartAnimator.GetCurrentAnimatorStateInfo(0).length;
 

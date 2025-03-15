@@ -58,6 +58,7 @@ public class SpawnScript : MonoBehaviour
             spawnedEnemies.Add(enemy);
 
             EnemyCollision enemyCollision = enemy.GetComponent<EnemyCollision>();
+            FruitCollision fruitCollision = fruit.GetComponent<FruitCollision>();
 
             if (enemyCollision != null)
             {

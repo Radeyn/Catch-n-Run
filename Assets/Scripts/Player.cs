@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.UIElements;
 public class Player : MonoBehaviour
 {
     public Rigidbody2D rb;
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI totalScoreText;
     private Vector2 movement;
+    public float scaleX;
 
 
 
@@ -53,13 +55,14 @@ public class Player : MonoBehaviour
 
 
 
+
         if (moveInput.x < 0)
         {
-            transform.localScale = new Vector3(-8f, 8f, 8f); 
+            transform.localScale = new Vector3(-scaleX, 8f, 8f); 
         }
         else if (moveInput.x > 0)
         {
-            transform.localScale = new Vector3(8f, 8f, 8f); 
+            transform.localScale = new Vector3(scaleX, 8f, 8f); 
         }
 
 

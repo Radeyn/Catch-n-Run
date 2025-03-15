@@ -10,7 +10,9 @@ public class FruitCollision : MonoBehaviour
     {
         player = FindAnyObjectByType<Player>();
         rb = GetComponent<Rigidbody2D>();
+        rb.angularVelocity = 200f;
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
@@ -22,19 +24,11 @@ public class FruitCollision : MonoBehaviour
             player.score++;
 
             Destroy(gameObject); // Çarpışan Fruit objesini yok et
-            Destroy(gameObject, 5);
             Debug.Log("Score: " + playerScore);
 
             
 
         }
     }
-
-    public void DestroyFruit() 
-    
-    { 
-        DestroyImmediate(gameObject); 
-    }
-
 
 }
