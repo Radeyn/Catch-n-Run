@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ResetGameScript : MonoBehaviour
 {
@@ -53,9 +54,11 @@ public class ResetGameScript : MonoBehaviour
         player.transform.position = new Vector3(0, 1.20f, 0f);
         
         gameOverUI.SetActive(false);
+        if (SceneManager.GetActiveScene() != null)
+        {
+            StartCoroutine(startCountdown.StartCountdownRoutine());
+        }
         
-        StartCoroutine(startCountdown.StartCountdownRoutine());
-        Time.timeScale = 1.0f;
 
 
     }

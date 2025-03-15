@@ -25,6 +25,7 @@ public class StartCountdown : MonoBehaviour
 
     public IEnumerator StartCountdownRoutine()
     {
+        Time.timeScale = 1.0f;
         countdown.gameObject.SetActive(true);
         StartCoroutine(spawnScript.DelayedStart());
 
