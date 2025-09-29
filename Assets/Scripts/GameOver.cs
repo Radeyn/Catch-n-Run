@@ -33,9 +33,9 @@ public class GameOver : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
-        if (player == null) return;  // Oyuncu yoksa hata vermemesi için kontrol
+        if (!player) return;  // Oyuncu yoksa hata vermemesi için kontrol
 
         float playerHealth = player.playerHealth;
 

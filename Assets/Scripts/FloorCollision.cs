@@ -16,7 +16,7 @@ public class FloorCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Fruit") || collision.gameObject.CompareTag("Enemy"))
         {
-
+            
             Destroy(collision.gameObject);
         }
     }

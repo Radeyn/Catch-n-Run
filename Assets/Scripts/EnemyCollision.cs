@@ -28,18 +28,18 @@ public class EnemyCollision : MonoBehaviour
         {
 
         if (collision.gameObject.CompareTag("Player"))
-           {
+        {
 
-             player.animator.SetTrigger("GetHit");
+            //player._animator.SetTrigger("GetHit");
 
-             player.playerHealth--;
+            //player.playerHealth--;
 
 
-             Destroy(gameObject);
+            Destroy(gameObject);
 
-             Debug.Log("Player Health: " + player.playerHealth);
+            //Debug.Log("Player Health: " + player.playerHealth);
 
-            }
+        }
 
         }
 }

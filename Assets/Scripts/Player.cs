@@ -1,38 +1,32 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-using UnityEngine.UIElements;
+
 public class Player : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    private PlayerInput playerInput;
-    private InputAction moveAction;
-    private bool isMoving;
-    public Animator animator;
-    public float playerHealth;
+    [SerializeField] public float playerHealth;
+    public float MoveSpeed {get; set;}
+    
+    private Rigidbody2D _rigidbody;         
+    private PlayerInput _playerInput;
+    private InputAction _moveAction;
+    
+    private bool _isMoving;
     public Vector2 moveInput;
-    public float moveSpeed = 5f;
-    public int score;
-    public GameObject gameOverUI;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI totalScoreText;
-    private Vector2 movement;
+    private Animator _animator;
+    
+    private TextMeshProUGUI _scoreText;
+    private TextMeshProUGUI _totalScoreText;
+    private GameObject _gameOverUI;
+    
+    private Vector2 _movement;
     public float scaleX;
-
-
 
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
-        moveAction = playerInput.actions["Move"];
+        GetReferences();
     }
-
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-    }
-
+   
     private void Show()
     {
         gameObject.SetActive(true);
@@ -42,19 +36,14 @@ public class Player : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-
- 
+    
     private void Update()
     {
         
-        isMoving = moveInput.x != 0 || moveInput.y != 0;
+        _isMoving = moveInput.x != 0 || moveInput.y != 0;
 
-        animator.SetBool("IsRunning", isMoving);
-
-        UpdateScoreText();
-
-
-
+        _animator.SetBool("IsRunning", _isMoving);
+        
 
         if (moveInput.x < 0)
         {
@@ -64,11 +53,13 @@ public class Player : MonoBehaviour
         {
             transform.localScale = new Vector3(scaleX, 8f, 8f); 
         }
-
-
-       
+        
     }
 
+    public void IncreaseSpeed(int moveSpeed)
+    {
+        
+    }
     private void FixedUpdate()
     {
         IsMoving();
@@ -77,21 +68,22 @@ public class Player : MonoBehaviour
 
     public bool IsMoving() 
     {
-        moveInput = moveAction.ReadValue<Vector2>();
+        moveInput = _moveAction.ReadValue<Vector2>();
 
-        Vector2 movement = moveInput.normalized * moveSpeed;
+        Vector2 movement = moveInput.normalized * MoveSpeed;
 
-        rb.linearVelocity = movement;
+        _rigidbody.linearVelocity = movement;
 
-        return isMoving;
-
-
+        return _isMoving;
+        
     }
-
-    private void UpdateScoreText()
+    
+    private void GetReferences()
     {
-        scoreText.text = "SCORE: " + score.ToString(); 
-        totalScoreText.text = "TOTAL SCORE: " + score.ToString(); 
-
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        _playerInput = GetComponent<PlayerInput>();
+        
+        _moveAction = _playerInput.actions["Move"];
     }
 }

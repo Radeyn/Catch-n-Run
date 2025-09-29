@@ -7,17 +7,19 @@ public class GameDiffucilty : MonoBehaviour
     private SpawnScript spawnScript;
     private EnemyCollision enemyCollision;
     private Vector2 moveInput;
+    private Score _score;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GetComponent<Player>();
         spawnScript = FindAnyObjectByType<SpawnScript>();
         enemyCollision = FindAnyObjectByType<EnemyCollision>();
+        _score = FindAnyObjectByType<Score>();
     }
 
     private void Update()
     {
-        int score = player.score;
+        int score = _score.currentScore;
 
 
 
@@ -106,8 +108,8 @@ public class GameDiffucilty : MonoBehaviour
     private void UpdatePlayer(float speed, float scaleX)
 
     {
+        player.MoveSpeed = speed;
         player.scaleX = scaleX;
-
         player.moveInput = moveInput;
 
 
@@ -121,7 +123,7 @@ public class GameDiffucilty : MonoBehaviour
             transform.localScale = new Vector3(scaleX, 8f, 8f);
         }
 
-        player.moveSpeed = speed;
+        
         
     }
 
