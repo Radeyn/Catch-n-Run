@@ -2,32 +2,30 @@
 
 public class FruitCollision : MonoBehaviour
 {
-    private Player player;
-    private Rigidbody2D rb;
-    private int playerScore;
+    private Player _player;
+    private Score _score;
+    private Rigidbody2D _rigidbody2D;
 
     private void Start()
     {
-        player = FindAnyObjectByType<Player>();
-        rb = GetComponent<Rigidbody2D>();
-        rb.angularVelocity = 200f;
+        _player = GetComponent<Player>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _rigidbody2D.angularVelocity = 200f;
+        
+    }
+    
+    public void SetReferences(Score score)
+    {
+        _score = score;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        playerScore = player.score;
-
-
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            player.score++;
-
-            Destroy(gameObject); // Çarpışan Fruit objesini yok et
-            Debug.Log("Score: " + playerScore);
-
+        if (collision.gameObject.CompareTag("Player")) { 
             
-
+            _score.AddScore(1);
+            Destroy(gameObject);
+            
         }
     }
 

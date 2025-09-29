@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpawnScript : MonoBehaviour
 {
+    [SerializeField]private Score score;
+    
     private Rigidbody2D rb;
     private int startTimer = 3;
     public float gravityScale;
@@ -59,13 +61,15 @@ public class SpawnScript : MonoBehaviour
 
             EnemyCollision enemyCollision = enemy.GetComponent<EnemyCollision>();
             FruitCollision fruitCollision = fruit.GetComponent<FruitCollision>();
-
+            
+            
             if (enemyCollision != null)
             {
                 enemyCollision.UpdateSpikeGravity(gravityScale);
             }
 
-
+            fruit.GetComponent<FruitCollision>().SetReferences(score);
+            
         }
 
     }

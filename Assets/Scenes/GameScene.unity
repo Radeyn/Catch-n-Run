@@ -626,15 +626,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b956799742fd7346acbcc86d342f6fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 174782440}
-  animator: {fileID: 0}
   playerHealth: 4
   moveInput: {x: 0, y: 0}
-  moveSpeed: 25
-  score: 0
-  gameOverUI: {fileID: 1573318013}
-  scoreText: {fileID: 107373552}
-  totalScoreText: {fileID: 1064382332}
   scaleX: 0
 --- !u!114 &174782438
 MonoBehaviour:
@@ -1884,6 +1877,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &927415985
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 927415987}
+  - component: {fileID: 927415986}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &927415986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927415985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d6367c3f365f845b01b0140ff4f8f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &927415987
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927415985}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.35, y: 18.39, z: 0.02540294}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &941048846
 GameObject:
   m_ObjectHideFlags: 0
@@ -2514,6 +2551,7 @@ GameObject:
   - component: {fileID: 1156620223}
   - component: {fileID: 1156620222}
   - component: {fileID: 1156620226}
+  - component: {fileID: 1156620227}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2619,7 +2657,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e407c1038760d54fa6f7d44a1e6b39d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: {fileID: 0}
   gameOverUI: {fileID: 1573318013}
+--- !u!114 &1156620227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156620221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e79819dc30991534386b9faa5415f4b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 0}
+  scoreText: {fileID: 107373552}
+  totalScoreText: {fileID: 1064382332}
 --- !u!1 &1175606005
 GameObject:
   m_ObjectHideFlags: 0
@@ -4422,3 +4476,4 @@ SceneRoots:
   - {fileID: 1156620225}
   - {fileID: 908782971}
   - {fileID: 158085405}
+  - {fileID: 927415987}

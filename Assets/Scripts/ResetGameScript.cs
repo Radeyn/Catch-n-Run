@@ -9,7 +9,8 @@ public class ResetGameScript : MonoBehaviour
     private FruitCollision fruitCollision;
     private EnemyCollision enemyCollision;
     private SpawnScript spawnScript;
-    private  StartCountdown startCountdown;
+    private StartCountdown startCountdown;
+    [SerializeField]private Score score;
 
     public GameObject gameOverUI;
 
@@ -48,9 +49,9 @@ public class ResetGameScript : MonoBehaviour
         gameOver.ResetAnimation();
 
 
-        player.score = 0;
+        score.currentScore = 0;
         player.playerHealth = 4;
-        player.moveSpeed = 25;
+        player.MoveSpeed = 25;
         player.transform.position = new Vector3(0, 1.20f, 0f);
         
         gameOverUI.SetActive(false);
