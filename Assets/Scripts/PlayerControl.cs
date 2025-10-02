@@ -2,24 +2,26 @@
 using UnityEngine.InputSystem;
 using TMPro;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerControl : MonoBehaviour
 {
-    public float MoveSpeed {get; set;}
+    [SerializeField] private PlayerStatus playerStatus;
+    
+    
     private Rigidbody2D _rigidbody;         
     private PlayerInput _playerInput;
     private InputAction _moveAction;
 
-    public bool _isMoving;
+    public bool isMoving;
     public Vector2 moveInput;
     
     
     private Vector2 _movement;
-    public float scaleX;
     private bool _b;
 
     private void Start()
     {
         _b = IsMoving();
+        
     }
 
     private void Awake()
@@ -39,17 +41,15 @@ public class PlayerMovement : MonoBehaviour
     
     private void Update()
     {
-        _isMoving = moveInput.x != 0 || moveInput.y != 0;
-
-        
+        isMoving = moveInput.x != 0 || moveInput.y != 0;
 
         if (moveInput.x < 0)
         {
-            transform.localScale = new Vector3(-scaleX, 8f, 8f); 
+            transform.localScale = new Vector3(-playerStatus.ScaleX, 8f, 8f); 
         }
         else if (moveInput.x > 0)
         {
-            transform.localScale = new Vector3(scaleX, 8f, 8f); 
+            transform.localScale = new Vector3(playerStatus.ScaleX, 8f, 8f); 
         }
         
     }
@@ -63,11 +63,11 @@ public class PlayerMovement : MonoBehaviour
     {
         moveInput = _moveAction.ReadValue<Vector2>();
 
-        var movement = moveInput.normalized * MoveSpeed;
+        var movement = moveInput.normalized * playerStatus.CurrentSpeed;
 
         _rigidbody.linearVelocity = movement;
 
-        return _isMoving;
+        return isMoving;
         
     }
     

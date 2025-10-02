@@ -3,11 +3,12 @@ using UnityEngine;
 
 public class GameOver : MonoBehaviour
 {
+    [SerializeField]private PlayerStatus _playerStatus;
+    
     private Animator firstHeartAnimator;
     private Animator secondHeartAnimator;
     private Animator thirdHeartAnimator;
     private Animator lastHeartAnimator;
-    private PlayerStatus _playerStatus;
 
     public GameObject firstHeart;
     public GameObject secondHeart;
@@ -26,7 +27,6 @@ public class GameOver : MonoBehaviour
 
 
         // Oyuncuyu bul
-        _playerStatus = FindAnyObjectByType<PlayerStatus>();
         if (_playerStatus == null)
         {
             Debug.LogError("Player script not found!");

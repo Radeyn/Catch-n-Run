@@ -2,15 +2,10 @@ using UnityEngine;
 
 public class GameMusicScript : MonoBehaviour
 {
-    private AudioSource gameMusic;
-    void Start()
-    {
-
-        
-    }
+    private AudioSource _gameMusic;
 
     public void Update()
     {
-        gameMusic.Play();
+        _gameMusic.Play();
     }
 }

@@ -6,16 +6,18 @@ public class ResetGameScript : MonoBehaviour
     private readonly Vector3 _startPoint = new Vector3(0f, 1.20f, 0f);
     
     
-    [SerializeField]private PlayerMovement playerMovement;
+    private PlayerControl playerControl;
     [SerializeField]private GameOver gameOver;
-    [SerializeField]private FruitCollision fruitCollision;
-    [SerializeField]private EnemyCollision enemyCollision;
     [SerializeField]private SpawnScript spawnScript;
     [SerializeField]private StartCountdown startCountdown;
     [SerializeField]private Score score;
     [SerializeField]private GameObject gameOverUI;
     [SerializeField]private PlayerStatus playerStatus;
 
+    private void Start()
+    {
+        playerControl = GameObject.Find("Player").GetComponent<PlayerControl>();
+    }
 
     public void ResetGame()
     {
@@ -37,21 +39,21 @@ public class ResetGameScript : MonoBehaviour
         spawnScript.StopAllCoroutines();
         gameOver.StopAllCoroutines();
 
-        
-        spawnScript.maxSpawnInterval = 1.5f;
+        spawnScript.ResetSpikeGravity();
+        spawnScript.ResetSpawnInterval();
         gameOver.ResetAnimation();
 
 
         score.ResetScore();
         playerStatus.ResetHealth();
-        playerMovement.MoveSpeed = 25;
-        playerMovement.transform.position = _startPoint;
-        
+        playerStatus.ResetSpeed();
+        if (playerControl.transform != null) playerControl.transform.position = _startPoint;
+
         gameOverUI.SetActive(false);
-        if (SceneManager.GetActiveScene() != null)
-        {
-            StartCoroutine(startCountdown.StartCountdownRoutine());
-        }
+        
+        
+        StartCoroutine(startCountdown.StartCountdownRoutine());
+        
         
 
 
