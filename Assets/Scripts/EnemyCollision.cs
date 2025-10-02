@@ -17,11 +17,7 @@ public class EnemyCollision : MonoBehaviour
     {
         _playerStatus = playerStatus;
     }
-    private void Update()
-    {
-        //rb = GetComponent<Rigidbody2D>();
-
-    }
+  
 
     public void UpdateSpikeGravity(float gravityScale)
     {

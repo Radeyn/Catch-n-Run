@@ -1,9 +1,15 @@
+using System;
 using UnityEngine;
 
 public class PlayAgainButton : MonoBehaviour
 {
-    [SerializeField]private ResetGameScript resetGameScript;
-    
+    private ResetGameScript resetGameScript;
+
+    private void Start()
+    {
+        resetGameScript  = FindAnyObjectByType<ResetGameScript>();
+    }
+
     public void OnClick()
     {
         resetGameScript.ResetGame();

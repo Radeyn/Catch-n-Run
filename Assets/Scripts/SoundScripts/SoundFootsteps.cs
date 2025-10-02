@@ -3,17 +3,17 @@
 public class SoundFootsteps : MonoBehaviour
 {
     public AudioSource footstepsSound;
-    private PlayerMovement _playerMovement;
+    private PlayerControl _playerControl;
 
 
     private void Start()
     {
-        _playerMovement = FindAnyObjectByType<PlayerMovement>();
+        _playerControl = FindAnyObjectByType<PlayerControl>();
     }
 
     private void Update()
     {
-        if (_playerMovement.IsMoving())
+        if (_playerControl.IsMoving())
         {
             if (!footstepsSound.isPlaying) 
             {

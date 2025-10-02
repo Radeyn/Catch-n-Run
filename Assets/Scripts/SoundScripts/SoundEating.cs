@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class SoundEating : MonoBehaviour
 {
-    private PlayerMovement _playerMovement;
+    private PlayerControl _playerControl;
     public AudioSource eatingSound;
     private void Start()
     {
-        _playerMovement = FindAnyObjectByType<PlayerMovement>();
+        _playerControl = FindAnyObjectByType<PlayerControl>();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

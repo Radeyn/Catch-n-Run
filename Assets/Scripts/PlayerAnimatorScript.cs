@@ -4,11 +4,11 @@ public class PlayerAnimatorScript : MonoBehaviour
 {
 
     private Animator animator;
-    public PlayerMovement playerMovement;
+    public PlayerControl playerControl;
 
     void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
+        playerControl = GetComponent<PlayerControl>();
     }
 
     // Update is called once per frame
