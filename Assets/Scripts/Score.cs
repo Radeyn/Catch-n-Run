@@ -14,4 +14,9 @@ public class Score : MonoBehaviour
     {
         currentScore += amount;
     }
+
+    public void ResetScore()
+    {
+        currentScore = 0;
+    }
 }

@@ -7,7 +7,7 @@ public class GameOver : MonoBehaviour
     private Animator secondHeartAnimator;
     private Animator thirdHeartAnimator;
     private Animator lastHeartAnimator;
-    private Player player;
+    private PlayerStatus _playerStatus;
 
     public GameObject firstHeart;
     public GameObject secondHeart;
@@ -26,8 +26,8 @@ public class GameOver : MonoBehaviour
 
 
         // Oyuncuyu bul
-        player = FindAnyObjectByType<Player>();
-        if (player == null)
+        _playerStatus = FindAnyObjectByType<PlayerStatus>();
+        if (_playerStatus == null)
         {
             Debug.LogError("Player script not found!");
         }
@@ -35,9 +35,9 @@ public class GameOver : MonoBehaviour
 
     private void Update()
     {
-        if (!player) return;  // Oyuncu yoksa hata vermemesi için kontrol
+        if (!_playerStatus) return;  // Oyuncu yoksa hata vermemesi için kontrol
 
-        float playerHealth = player.playerHealth;
+        float playerHealth = _playerStatus.CurrentHealth;
 
 
         if (playerHealth < 4)
@@ -77,24 +77,24 @@ public class GameOver : MonoBehaviour
         { 
             lastHeartAnimator.SetBool("HeartEmpty", false);
         }
-        }
+    }
 
-        IEnumerator GameOverSequence()
-        {
+    IEnumerator GameOverSequence()
+    {
             
 
             
 
-            float animTime = lastHeartAnimator.GetCurrentAnimatorStateInfo(0).length;
+        float animTime = lastHeartAnimator.GetCurrentAnimatorStateInfo(0).length;
 
-            yield return new WaitForSecondsRealtime(animTime); //
+        yield return new WaitForSecondsRealtime(animTime); //
 
 
 
-            Time.timeScale = 0; 
-            gameOverUI.SetActive(true); 
+        Time.timeScale = 0; 
+        gameOverUI.SetActive(true); 
 
-        }
+    }
     public void ResetAnimation()
     {
 

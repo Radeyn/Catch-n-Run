@@ -2,16 +2,21 @@
 
 public class EnemyCollision : MonoBehaviour
 {
-    private Player player;
+    private PlayerStatus _playerStatus;
+    
     public Rigidbody2D rb;
-
+    
+    
 
     private void Start()
     {
-            player = FindAnyObjectByType<Player>();
             rb = GetComponent<Rigidbody2D>();
     }
 
+    public void SetReferences(PlayerStatus playerStatus)
+    {
+        _playerStatus = playerStatus;
+    }
     private void Update()
     {
         //rb = GetComponent<Rigidbody2D>();
@@ -29,17 +34,17 @@ public class EnemyCollision : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
-
-            //player._animator.SetTrigger("GetHit");
-
-            //player.playerHealth--;
-
-
+            
+            if (_playerStatus != null)
+                _playerStatus.TakeDamage(1);
+            
             Destroy(gameObject);
 
-            //Debug.Log("Player Health: " + player.playerHealth);
+            Debug.Log("Player Health: " + _playerStatus.CurrentHealth);
 
         }
 
         }
+
+    
 }

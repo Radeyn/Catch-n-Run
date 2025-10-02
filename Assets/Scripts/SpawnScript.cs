@@ -5,6 +5,8 @@ using UnityEngine;
 public class SpawnScript : MonoBehaviour
 {
     [SerializeField]private Score score;
+    [SerializeField]private PlayerStatus playerStatus;
+    [SerializeField]private GameObject spawnPosition;
     
     private Rigidbody2D rb;
     private int startTimer = 3;
@@ -37,6 +39,7 @@ public class SpawnScript : MonoBehaviour
     }
 
 
+    // ReSharper disable Unity.PerformanceAnalysis
     public IEnumerator SpawnObjects()
     {
         
@@ -47,16 +50,25 @@ public class SpawnScript : MonoBehaviour
 
             yield return new WaitForSeconds(spawnInterval);
 
+            Vector2 spawnPositionEnemy = new Vector2(
+                Random.Range((float)-12, (float)20),
+                Random.Range((float)16, (float)17)
 
-            int randomIndexFruit = Random.Range(0, spawnPointsFruit.Length);
-            int randomIndexEnemy = Random.Range(0, spawnPointsEnemy.Length);
+            );
+            
+            Vector2 spawnPositionFruit = new Vector2(
+                Random.Range((float)-12, (float)20),
+                Random.Range((float)16, (float)17)
+
+            );
+            
             int randomFruit = Random.Range(0, fruitPrefabs.Length);
             int randomEnemy = Random.Range(0, enemyPrefabs.Length);
 
-            GameObject fruit = Instantiate(fruitPrefabs[randomFruit], spawnPointsFruit[randomIndexFruit].position, Quaternion.identity);
+            GameObject fruit = Instantiate(fruitPrefabs[randomFruit], spawnPositionFruit, Quaternion.identity);
             spawnedFruits.Add(fruit);
 
-            GameObject enemy = Instantiate(enemyPrefabs[randomEnemy], spawnPointsEnemy[randomIndexEnemy].position, Quaternion.identity);
+            GameObject enemy = Instantiate(enemyPrefabs[randomEnemy], spawnPositionEnemy, Quaternion.identity);
             spawnedEnemies.Add(enemy);
 
             EnemyCollision enemyCollision = enemy.GetComponent<EnemyCollision>();
@@ -69,6 +81,8 @@ public class SpawnScript : MonoBehaviour
             }
 
             fruit.GetComponent<FruitCollision>().SetReferences(score);
+            enemy.GetComponent<EnemyCollision>().SetReferences(playerStatus);
+            
             
         }
 

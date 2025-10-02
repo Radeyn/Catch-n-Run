@@ -2,25 +2,25 @@
 using UnityEngine.InputSystem;
 using TMPro;
 
-public class Player : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] public float playerHealth;
     public float MoveSpeed {get; set;}
-    
     private Rigidbody2D _rigidbody;         
     private PlayerInput _playerInput;
     private InputAction _moveAction;
-    
-    private bool _isMoving;
+
+    public bool _isMoving;
     public Vector2 moveInput;
-    private Animator _animator;
     
-    private TextMeshProUGUI _scoreText;
-    private TextMeshProUGUI _totalScoreText;
-    private GameObject _gameOverUI;
     
     private Vector2 _movement;
     public float scaleX;
+    private bool _b;
+
+    private void Start()
+    {
+        _b = IsMoving();
+    }
 
     private void Awake()
     {
@@ -39,10 +39,8 @@ public class Player : MonoBehaviour
     
     private void Update()
     {
-        
         _isMoving = moveInput.x != 0 || moveInput.y != 0;
 
-        _animator.SetBool("IsRunning", _isMoving);
         
 
         if (moveInput.x < 0)
@@ -60,17 +58,12 @@ public class Player : MonoBehaviour
     {
         
     }
-    private void FixedUpdate()
-    {
-        IsMoving();
-      
-    }
-
+    // ReSharper disable Unity.PerformanceAnalysis
     public bool IsMoving() 
     {
         moveInput = _moveAction.ReadValue<Vector2>();
 
-        Vector2 movement = moveInput.normalized * MoveSpeed;
+        var movement = moveInput.normalized * MoveSpeed;
 
         _rigidbody.linearVelocity = movement;
 
@@ -81,7 +74,6 @@ public class Player : MonoBehaviour
     private void GetReferences()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
         _playerInput = GetComponent<PlayerInput>();
         
         _moveAction = _playerInput.actions["Move"];

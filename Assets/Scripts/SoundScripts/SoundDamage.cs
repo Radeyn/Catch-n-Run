@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class SoundDamage : MonoBehaviour
 {
-    private Player player;
+    private PlayerMovement _playerMovement;
     public AudioSource damageSound;
     private void Start()
     {
-        player = FindAnyObjectByType<Player>();
+        _playerMovement = FindAnyObjectByType<PlayerMovement>();
 
     }
     private void OnCollisionEnter2D(Collision2D collision)
