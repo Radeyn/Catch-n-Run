@@ -4,7 +4,7 @@ using TMPro;
 public class ScoreUI : MonoBehaviour
 {
     [SerializeField]private GameObject gameManager;
-    private Score score;
+    private Score _score;
     private int _previousScore;
     
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -17,14 +17,14 @@ public class ScoreUI : MonoBehaviour
 
     private void Update()
     {
-        if (score.currentScore == _previousScore) return;
-        _previousScore = score.currentScore;
+        if (_score.currentScore == _previousScore) return;
+        _previousScore = _score.currentScore;
         scoreText.text = _previousScore.ToString();
 
-        totalScoreText.text = score.currentScore.ToString();
+        totalScoreText.text = _score.currentScore.ToString();
     }
     private void GetReferences()
     {
-        score = gameManager.GetComponent<Score>();
+        _score = gameManager.GetComponent<Score>();
     }
 }

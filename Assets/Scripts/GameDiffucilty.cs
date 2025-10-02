@@ -2,7 +2,7 @@
 
 public class GameDiffucilty : MonoBehaviour
 {
-    private Player player;
+    private PlayerMovement _playerMovement;
     private Rigidbody2D rb;
     private SpawnScript spawnScript;
     private EnemyCollision enemyCollision;
@@ -11,7 +11,7 @@ public class GameDiffucilty : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        player = GetComponent<Player>();
+        _playerMovement = GetComponent<PlayerMovement>();
         spawnScript = FindAnyObjectByType<SpawnScript>();
         enemyCollision = FindAnyObjectByType<EnemyCollision>();
         _score = FindAnyObjectByType<Score>();
@@ -108,9 +108,9 @@ public class GameDiffucilty : MonoBehaviour
     private void UpdatePlayer(float speed, float scaleX)
 
     {
-        player.MoveSpeed = speed;
-        player.scaleX = scaleX;
-        player.moveInput = moveInput;
+        _playerMovement.MoveSpeed = speed;
+        _playerMovement.scaleX = scaleX;
+        _playerMovement.moveInput = moveInput;
 
 
         if (moveInput.x < 0)

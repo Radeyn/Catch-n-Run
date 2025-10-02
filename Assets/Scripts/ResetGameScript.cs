@@ -3,29 +3,22 @@ using UnityEngine.SceneManagement;
 
 public class ResetGameScript : MonoBehaviour
 {
-
-    private Player player;
-    private GameOver gameOver;
-    private FruitCollision fruitCollision;
-    private EnemyCollision enemyCollision;
-    private SpawnScript spawnScript;
-    private StartCountdown startCountdown;
+    private readonly Vector3 _startPoint = new Vector3(0f, 1.20f, 0f);
+    
+    
+    [SerializeField]private PlayerMovement playerMovement;
+    [SerializeField]private GameOver gameOver;
+    [SerializeField]private FruitCollision fruitCollision;
+    [SerializeField]private EnemyCollision enemyCollision;
+    [SerializeField]private SpawnScript spawnScript;
+    [SerializeField]private StartCountdown startCountdown;
     [SerializeField]private Score score;
+    [SerializeField]private GameObject gameOverUI;
+    [SerializeField]private PlayerStatus playerStatus;
 
-    public GameObject gameOverUI;
-
-    private void Start()
-    {
-        spawnScript = FindAnyObjectByType<SpawnScript>();
-        startCountdown = FindAnyObjectByType<StartCountdown>();
-        gameOver = FindAnyObjectByType<GameOver>();
-        player = FindAnyObjectByType<Player>();
-    }
 
     public void ResetGame()
     {
-
-
         foreach (GameObject enemy in spawnScript.spawnedEnemies)
         {
             if (enemy != null)
@@ -49,10 +42,10 @@ public class ResetGameScript : MonoBehaviour
         gameOver.ResetAnimation();
 
 
-        score.currentScore = 0;
-        player.playerHealth = 4;
-        player.MoveSpeed = 25;
-        player.transform.position = new Vector3(0, 1.20f, 0f);
+        score.ResetScore();
+        playerStatus.ResetHealth();
+        playerMovement.MoveSpeed = 25;
+        playerMovement.transform.position = _startPoint;
         
         gameOverUI.SetActive(false);
         if (SceneManager.GetActiveScene() != null)
