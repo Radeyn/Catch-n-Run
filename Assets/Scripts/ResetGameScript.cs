@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class ResetGameScript : MonoBehaviour
 {
-    private readonly Vector3 _startPoint = new Vector3(0f, 1.20f, 0f);
+    private readonly Vector3 _startPoint = new Vector3(0f, 0.94f, 0f);
     
     
     private PlayerControl playerControl;
@@ -47,6 +47,7 @@ public class ResetGameScript : MonoBehaviour
         score.ResetScore();
         playerStatus.ResetHealth();
         playerStatus.ResetSpeed();
+        playerStatus.ResetWeight();
         if (playerControl.transform != null) playerControl.transform.position = _startPoint;
 
         gameOverUI.SetActive(false);

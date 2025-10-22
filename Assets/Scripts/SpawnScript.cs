@@ -70,16 +70,23 @@
                 GameObject enemy = Instantiate(enemyPrefabs[randomEnemy], spawnPositionEnemy, Quaternion.identity);
                 spawnedEnemies.Add(enemy);
 
+                LittleFruit littleFruit = fruit.GetComponent<LittleFruit>();
+                BigFruit bigFruit = fruit.GetComponent<BigFruit>();
+
+                if (littleFruit != null)
+                    littleFruit.SetReferences(score);
+                else if (bigFruit != null)
+                    bigFruit.SetReferences(score);
+
+                // Enemy componentini al
                 EnemyCollision enemyCollision = enemy.GetComponent<EnemyCollision>();
-                FruitCollision fruitCollision = fruit.GetComponent<FruitCollision>();
-                
-                
-                fruit.GetComponent<FruitCollision>().SetReferences(score);
-                enemy.GetComponent<EnemyCollision>().SetReferences(playerStatus);
-                
+                if (enemyCollision != null)
+                    enemyCollision.SetReferences(playerStatus);
+
+                // Rigidbody ayarları
                 Rigidbody2D fruitRb = fruit.GetComponent<Rigidbody2D>();
                 Rigidbody2D enemyRb = enemy.GetComponent<Rigidbody2D>();
-                
+
                 if (fruitRb != null) fruitRb.gravityScale = _spikeGravityScale;
                 if (enemyRb != null) enemyRb.gravityScale = _spikeGravityScale;
             }
@@ -89,12 +96,10 @@
         public void DecreaseSpawnInterval(float amount)
         {
             _maxSpawnInterval = Mathf.Max(_minSpawnInterval, _maxSpawnInterval - amount);
-            Debug.Log("MaxSpawnInterval: " + _maxSpawnInterval);
         }
         public void IncreaseSpikeGravity(float amount)
         {
             _spikeGravityScale += amount;
-            Debug.Log("gravity scale" + _spikeGravityScale);
         }
 
         public void ResetSpikeGravity()

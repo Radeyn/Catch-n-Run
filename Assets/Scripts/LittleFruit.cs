@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class FruitCollision : MonoBehaviour
+public class LittleFruit : MonoBehaviour
 {
     private Score _score;
     private Rigidbody2D _rigidbody2D;
@@ -20,7 +20,7 @@ public class FruitCollision : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Player")) return;
-        _score.AddScore(1);
+        _score.AddScore(20);
         Destroy(gameObject);
         
         if (!collision.gameObject.CompareTag("Enemy")) return;

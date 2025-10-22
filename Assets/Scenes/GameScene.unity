@@ -146,7 +146,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0382ad0b711353f47afa0ad069cea9f0, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 0382ad0b711353f47afa0ad069cea9f0, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
@@ -453,9 +453,9 @@ Transform:
   m_GameObject: {fileID: 174782435}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.2, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 8}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 455666611}
   - {fileID: 1537531372}
@@ -473,9 +473,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b956799742fd7346acbcc86d342f6fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isMoving: 0
+  playerStatus: {fileID: 174782449}
+  isMoving: 0
   moveInput: {x: 0, y: 0}
-  scaleX: 0
 --- !u!114 &174782438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,6 +545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5255416cd2574c4c88a78aa8b23074d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreThreshold: 5
 --- !u!95 &174782442
 Animator:
   serializedVersion: 7
@@ -555,7 +556,7 @@ Animator:
   m_GameObject: {fileID: 174782435}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1ce4557d15276e943bb81841d816e7e4, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -587,6 +588,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -608,10 +611,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -6367560908665664636, guid: cd947491a13509945aa1b644f9db3ef2, type: 3}
+  m_Sprite: {fileID: 7766762442988310043, guid: 08785a481b64942458f61070d0f2d0d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -674,6 +678,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 4
+  maxSpeed: 25
+  ScaleX: 1
   animator: {fileID: 174782442}
 --- !u!114 &174782450
 MonoBehaviour:
@@ -803,6 +809,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -824,6 +832,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -919,8 +928,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0054410547, y: -0.042173237}
-  m_Size: {x: 0.22250119, y: 0.25183326}
+  m_Offset: {x: 0.37382996, y: 0.8651967}
+  m_Size: {x: 0.98104334, y: 2.0665731}
   m_Direction: 0
 --- !u!1 &504801493
 GameObject:
@@ -980,10 +989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e407c1038760d54fa6f7d44a1e6b39d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 174782437}
   gameOver: {fileID: 880509398}
-  fruitCollision: {fileID: 0}
-  enemyCollision: {fileID: 0}
   spawnScript: {fileID: 1077157483}
   startCountdown: {fileID: 1699804350}
   score: {fileID: 504801494}
@@ -1050,7 +1056,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9
+  orthographic size: 4.91
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1075,7 +1081,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6, z: -10}
+  m_LocalPosition: {x: 0, y: 4.1, z: -10.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1145,7 +1151,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9fe2076edddf8274d8af7861f9b2dad5, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9fe2076edddf8274d8af7861f9b2dad5, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
@@ -1435,6 +1441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f57b7a4812872549b409e9c3fda416d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerStatus: {fileID: 174782449}
   firstHeart: {fileID: 2104465597}
   secondHeart: {fileID: 1626104464}
   thirdHeart: {fileID: 1672580723}
@@ -1964,7 +1971,6 @@ MonoBehaviour:
   score: {fileID: 504801494}
   playerStatus: {fileID: 174782449}
   spawnPosition: {fileID: 1126115135}
-  gravityScale: 0
   spawnPointsFruit:
   - {fileID: 0}
   - {fileID: 0}
@@ -2005,8 +2011,6 @@ MonoBehaviour:
   - {fileID: 5602830507338356974, guid: 9c73f2d21fcc71246a4d923a769c2115, type: 3}
   enemyPrefabs:
   - {fileID: 2583545963490287718, guid: bd7133da035202a4285e1512f3b66756, type: 3}
-  minSpawnInterval: 0.3
-  maxSpawnInterval: 1.5
   spawnedEnemies: []
   spawnedFruits: []
 --- !u!1 &1126115135
@@ -2206,10 +2210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e407c1038760d54fa6f7d44a1e6b39d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 174782437}
   gameOver: {fileID: 880509398}
-  fruitCollision: {fileID: 0}
-  enemyCollision: {fileID: 0}
   spawnScript: {fileID: 1077157483}
   startCountdown: {fileID: 1699804350}
   score: {fileID: 504801494}
@@ -2586,7 +2587,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72201ab3abedab544ab3c9f0b20a10db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetGameScript: {fileID: 504801496}
 --- !u!1 &1464303046
 GameObject:
   m_ObjectHideFlags: 0
@@ -2626,6 +2626,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2647,6 +2649,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
@@ -3640,7 +3643,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f11cde5bd46945e49a1bde439348791d, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: f11cde5bd46945e49a1bde439348791d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
