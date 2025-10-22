@@ -2,8 +2,8 @@
 
 public class GameDifficulty : MonoBehaviour
 {
-    [SerializeField] private int scoreThreshold = 5;
-    private int _nextThreshold = 5;
+    [SerializeField] private int scoreThreshold = 2000;
+    private int _nextThreshold = 2000;
     
     private PlayerStatus _playerStatus;
     private SpawnScript _spawnScript;
@@ -23,12 +23,12 @@ public class GameDifficulty : MonoBehaviour
         if (score >= _nextThreshold)
         {
             
-            _playerStatus.DecreaseSpeedPercent(0.1f);
+            _playerStatus.DecreaseSpeedPercent(0.05f);
             _spawnScript.DecreaseSpawnInterval(0.1f);
             _spawnScript.IncreaseSpikeGravity(0.25f);
             _nextThreshold += scoreThreshold;
 
-            //_playerStatus.GainWeight(0.5f);
+            _playerStatus.GainWeight(0.1f);
         }
 
     }
