@@ -19,12 +19,23 @@ public class LittleFruit : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.CompareTag("Player")) return;
-        _score.AddScore(20);
-        Destroy(gameObject);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            _score.AddScore(20);
+            gameObject.SetActive(false);
+            
+        } 
         
-        if (!collision.gameObject.CompareTag("Enemy")) return;
-        Destroy(gameObject);
+        else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            gameObject.SetActive(false);
+        }
+
+        else if (collision.gameObject.CompareTag("Floor"))
+        {
+            gameObject.SetActive(false);
+        }
     }
 
+    
 }

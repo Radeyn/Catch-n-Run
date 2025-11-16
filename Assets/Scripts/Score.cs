@@ -1,22 +1,24 @@
+using System;
 using UnityEngine;
 
 public class Score : MonoBehaviour
 {
-    private readonly int _score = 0;
-    public int currentScore;
+    public event Action<int> OnScoreChanged;
+    
+    public  int score = 0;
 
     private void Start()
     {
-        currentScore = _score;
     }
 
     public void AddScore(int amount)
     {
-        currentScore += amount;
+        score += amount;
+        OnScoreChanged?.Invoke(score);
     }
 
-    public void ResetScore()
+    public int GetScore()
     {
-        currentScore = 0;
+        return score;
     }
 }

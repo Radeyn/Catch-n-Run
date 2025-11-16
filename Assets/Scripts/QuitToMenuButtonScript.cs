@@ -1,15 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class QuitButtonScript : MonoBehaviour
+public class QuitToMenuButtonScript : MonoBehaviour
 {
-    private ResetGameScript resetGameScript;
     private ToggleMusicScript toggleMusicScript;
 
     private void Start()
     {
         toggleMusicScript = FindAnyObjectByType<ToggleMusicScript>();
-        resetGameScript = FindAnyObjectByType<ResetGameScript>();
     }
     public void OnClick()
     {

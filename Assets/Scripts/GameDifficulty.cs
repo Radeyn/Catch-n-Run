@@ -1,61 +1,44 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class GameDifficulty : MonoBehaviour
 {
-    [SerializeField] private int scoreThreshold = 2000;
-    private int _nextThreshold = 2000;
+    [SerializeField] private Score score;
+    [SerializeField] private SpawnScript spawnScript;
     
-    private PlayerStatus _playerStatus;
-    private SpawnScript _spawnScript;
-    private Vector2 _moveInput;
-    private Score _score;
+    private int nextThreshold = 200;
+    public float speedMultiplier = 1;
+    
+    public event Action<float> OnSpeedChange;
+
     private void Start()
     {
-        _playerStatus = GetComponent<PlayerStatus>();
-        _spawnScript = FindAnyObjectByType<SpawnScript>();
-        _score = FindAnyObjectByType<Score>();
+        score.OnScoreChanged += HandleScoreChange;
     }
 
-    private void Update()
+    private void HandleScoreChange(int currentScore)
     {
-        int score = _score.currentScore;
-
-        if (score >= _nextThreshold)
+        if (currentScore >= nextThreshold)
         {
-            
-            _playerStatus.DecreaseSpeedPercent(0.05f);
-            _spawnScript.DecreaseSpawnInterval(0.1f);
-            _spawnScript.IncreaseSpikeGravity(0.25f);
-            _nextThreshold += scoreThreshold;
-
-            _playerStatus.GainWeight(0.1f);
+            IncreaseDiffucilty();
+            nextThreshold += 200;
         }
-
     }
 
-   /* private void MoveDirection()
-
+    private void IncreaseDiffucilty()
     {
-      
-        _playerControl.moveInput = moveInput;
+        spawnScript.DecreaseSpawnInterval(0.1f);
+        SpeedChange();
+        
+        Debug.Log("Spawn Increased");    
+    }
 
-
-        if (moveInput.x < 0)
-        {
-            transform.localScale = new Vector3(-scaleX, 8f, 8f);
-        }
-
-        else if (moveInput.x > 0)
-        {
-            transform.localScale = new Vector3(scaleX, 8f, 8f);
-        }
-
+    private void SpeedChange()
+    {
+        speedMultiplier += 0.1f;
+        OnSpeedChange?.Invoke(speedMultiplier);
         
         
     }
-*/
-  
-
- 
-
+    
 }
