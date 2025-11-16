@@ -1,4 +1,4 @@
-*.shader linguist-detectable=false
-*.cginc linguist-detectable=false
-*.hlsl linguist-detectable=false
-*.shadergraph linguist-detectable=false
+*.shader linguist-language=C#
+*.cginc linguist-language=C#
+*.hlsl linguist-language=C#
+*.shadergraph linguist-language=C#
