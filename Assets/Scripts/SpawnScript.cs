@@ -1,110 +1,114 @@
-﻿    using System.Collections;
+﻿    using System;
+    using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
+    using Random = UnityEngine.Random;
 
     public class SpawnScript : MonoBehaviour
     {
         [SerializeField]private Score score;
         [SerializeField]private PlayerStatus playerStatus;
-        [SerializeField]private GameObject spawnPosition;
+        [SerializeField]private GameDifficulty gameDifficulty;
+        
+        [SerializeField] private FruitPool fruitPool;
+        [SerializeField] private EnemyPool enemyPool;
+        
+        [SerializeField] private Transform[] spawnPoint;
 
         private int _startTimer = 3;
-        private float _spikeGravityScale = 1f;
 
-        public Transform[] spawnPointsFruit; 
-        public Transform[] spawnPointsEnemy; 
-        public GameObject[] fruitPrefabs;
-        public GameObject[] enemyPrefabs;
 
         private float _minSpawnInterval = 0.1f;
         private float _maxSpawnInterval = 1.5f; 
 
-        public List<GameObject> spawnedEnemies = new List<GameObject>();
-        public List<GameObject> spawnedFruits = new List<GameObject>();
 
 
         
         private void Start()
         {  
-            GetComponent<Rigidbody2D>();
+            StartCoroutine(SpawnObjects());
             
         }
 
-        public IEnumerator DelayedStart()
+        private void Update()
+        {
+            StopSpawning();
+        }
+
+        public IEnumerator SpawnObjects()
         {
             yield return new WaitForSeconds(_startTimer);
-            StartCoroutine(SpawnObjects());
 
-        }
-
-
-        // ReSharper disable Unity.PerformanceAnalysis
-        private IEnumerator SpawnObjects()
-        {
-            
             while (true)
             {
+                SpawnEnemy();
+                SpawnFruit();
+                yield return new WaitForSeconds(Random.Range(_minSpawnInterval, _maxSpawnInterval));
+            }
+        }            
 
-                float spawnInterval = Random.Range(_minSpawnInterval, _maxSpawnInterval);
 
-                yield return new WaitForSeconds(spawnInterval);
+        public void SpawnFruit()
+        {
+            int randomIndex = Random.Range(0, spawnPoint.Length);
 
-                Vector2 spawnPositionEnemy = new Vector2(
-                    Random.Range((float)-15, 15),
-                    Random.Range((float)16, 25)
+            GameObject fruitObj = fruitPool.GetPooledObject();
 
-                );
-                
-                Vector2 spawnPositionFruit = new Vector2(
-                    Random.Range((float)-16, 16),
-                    Random.Range((float)16, 25)
-
-                );
-                
-                int randomFruit = Random.Range(0, fruitPrefabs.Length);
-                int randomEnemy = Random.Range(0, enemyPrefabs.Length);
-
-                GameObject fruit = Instantiate(fruitPrefabs[randomFruit], spawnPositionFruit, Quaternion.identity);
-                spawnedFruits.Add(fruit);
-
-                GameObject enemy = Instantiate(enemyPrefabs[randomEnemy], spawnPositionEnemy, Quaternion.identity);
-                spawnedEnemies.Add(enemy);
-
-                LittleFruit littleFruit = fruit.GetComponent<LittleFruit>();
-                BigFruit bigFruit = fruit.GetComponent<BigFruit>();
-
-                if (littleFruit != null)
-                    littleFruit.SetReferences(score);
-                else if (bigFruit != null)
-                    bigFruit.SetReferences(score);
-
-                // Enemy componentini al
-                EnemyCollision enemyCollision = enemy.GetComponent<EnemyCollision>();
-                if (enemyCollision != null)
-                    enemyCollision.SetReferences(playerStatus);
-
-                // Rigidbody ayarları
-                Rigidbody2D fruitRb = fruit.GetComponent<Rigidbody2D>();
-                Rigidbody2D enemyRb = enemy.GetComponent<Rigidbody2D>();
-
-                if (fruitRb != null) fruitRb.gravityScale = _spikeGravityScale;
-                if (enemyRb != null) enemyRb.gravityScale = _spikeGravityScale;
+            if (fruitObj == null)
+            {
+                Debug.LogError("FruitPool -> NULL döndü!");
+                return;
             }
 
+            fruitObj.transform.position = spawnPoint[randomIndex].position;
+            fruitObj.SetActive(true);
+
+            LittleFruit littleFruit = fruitObj.GetComponent<LittleFruit>();
+            if (littleFruit != null)
+            {
+                littleFruit.SetReferences(score);
+            }
+
+            BigFruit bigFruit = fruitObj.GetComponent<BigFruit>();
+            if (bigFruit != null)
+            {
+                bigFruit.SetReferences(score);
+            }
+        }
+        
+        public void SpawnEnemy()
+        {
+            int randomIndex = Random.Range(0, spawnPoint.Length);
+            
+            GameObject enemyObj = enemyPool.GetPooledObject();
+
+            if (enemyObj != null)
+            {
+                enemyObj.transform.position = spawnPoint[randomIndex].position;
+                
+                Enemy enemy = enemyObj.GetComponent<Enemy>();
+                
+                enemy.SetPlayer(playerStatus);
+                enemy.SetDifficulty(gameDifficulty);
+                
+                enemyObj.SetActive(true);
+                
+            }
+            
+           
+        }
+
+        private void StopSpawning()
+        {
+            if (playerStatus._isDead)
+            {
+                StopAllCoroutines();
+            }
         }
 
         public void DecreaseSpawnInterval(float amount)
         {
             _maxSpawnInterval = Mathf.Max(_minSpawnInterval, _maxSpawnInterval - amount);
-        }
-        public void IncreaseSpikeGravity(float amount)
-        {
-            _spikeGravityScale += amount;
-        }
-
-        public void ResetSpikeGravity()
-        {
-            _spikeGravityScale = 1f;
         }
 
         public void ResetSpawnInterval()

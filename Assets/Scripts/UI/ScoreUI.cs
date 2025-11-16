@@ -17,11 +17,11 @@ public class ScoreUI : MonoBehaviour
 
     private void Update()
     {
-        if (_score.currentScore == _previousScore) return;
-        _previousScore = _score.currentScore;
+        if (_score.score == _previousScore) return;
+        _previousScore = _score.score;
         scoreText.text = _previousScore.ToString();
 
-        totalScoreText.text = _score.currentScore.ToString();
+        totalScoreText.text = _score.score.ToString();
     }
     private void GetReferences()
     {

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameOver : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class GameOver : MonoBehaviour
 
     private void Update()
     {
+        PauseGame();
+        
         if (!_playerStatus) return;  // Oyuncu yoksa hata vermemesi için kontrol
 
         float playerHealth = _playerStatus.CurrentHealth;
@@ -103,6 +106,15 @@ public class GameOver : MonoBehaviour
         thirdHeartAnimator.SetBool("HeartEmpty", false);
         lastHeartAnimator.SetBool("HeartEmpty", false);
         
+    }
+
+    void PauseGame()
+    {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            Time.timeScale = 0;
+            gameOverUI.SetActive(true);
+        }
     }
 }
 

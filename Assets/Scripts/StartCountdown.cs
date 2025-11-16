@@ -27,7 +27,7 @@ public class StartCountdown : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         countdown.gameObject.SetActive(true);
-        StartCoroutine(spawnScript.DelayedStart());
+        StartCoroutine(spawnScript.SpawnObjects());
 
 
         for (int i = 3; i > 0; i--)
