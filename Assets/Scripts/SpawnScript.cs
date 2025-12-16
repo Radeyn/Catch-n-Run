@@ -90,7 +90,6 @@
                 
                 enemy.SetPlayer(playerStatus);
                 enemy.SetDifficulty(gameDifficulty);
-                
                 enemyObj.SetActive(true);
                 
             }

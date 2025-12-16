@@ -4,7 +4,7 @@ public class Enemy : MonoBehaviour
 {
     
     private GameDifficulty _gameDifficulty;
-    private PlayerStatus _playerStatus;
+    PlayerStatus _playerStatus;
     private Rigidbody2D _rigidbody;
     private float baseGravity= 1f;
     

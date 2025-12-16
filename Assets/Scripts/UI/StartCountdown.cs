@@ -7,13 +7,13 @@ public class StartCountdown : MonoBehaviour
     public TextMeshProUGUI countdownText;
     public GameObject countdown;
     private Animator animator;
-    public SpawnScript spawnScript;
+    [SerializeField] SpawnScript spawnScript;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        
         StartCoroutine(StartCountdownRoutine());
-        spawnScript = FindAnyObjectByType<SpawnScript>();
 
     }
 

@@ -39,32 +39,6 @@ public class PlayerStatus : MonoBehaviour
             CurrentHealth = maxHealth;
         }
     }
-    public void ResetHealth()
-    {
-        CurrentHealth = maxHealth;
-        _isDead  = false;
-        
-    }
 
-    public void DecreaseSpeedPercent(float percent)
-    {
-        CurrentSpeed *= 1f - percent;
-        Debug.Log(CurrentSpeed);
-    }
-
-    public void ResetSpeed()
-    {
-        CurrentSpeed = maxSpeed;
-    }
-
-    public void GainWeight(float weight)
-    {
-        ScaleX += weight;
-    }
-
-    public void ResetWeight()
-    {
-        ScaleX = 1f;
-    }
     
 }
