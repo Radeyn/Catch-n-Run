@@ -15,6 +15,7 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] Animator animator;
 
     public float ScaleX { get; private set; } = 1f;
+    private float maxScaleX = 3f;
     public int CurrentHealth { get; private set; }
     [SerializeField] public float CurrentSpeed;
     
@@ -34,6 +35,7 @@ public class PlayerStatus : MonoBehaviour
     private void Subscribe(GameDifficulty difficulty)
     {
         difficulty.OnPlayerSpeedPenalty += LowerSpeed;
+        difficulty.OnScaleChange += IncreaseScale;
     }
    
     
@@ -75,6 +77,12 @@ public class PlayerStatus : MonoBehaviour
     {
         CurrentSpeed = Mathf.Max(minSpeed, CurrentSpeed - penalty);
         Debug.Log("Speed Decreased: " + CurrentSpeed);
+    }
+
+    private void IncreaseScale(float increaseScale)
+    {
+        ScaleX = Mathf.Min(maxScaleX, ScaleX + increaseScale);
+        Debug.Log("Scale Increased: " + ScaleX);
     }
     
 }

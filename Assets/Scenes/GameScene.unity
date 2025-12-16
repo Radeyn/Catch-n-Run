@@ -787,8 +787,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameDifficulty
   score: {fileID: 677045788}
-  speedPenalty: 1.5
   spawnScript: {fileID: 1077157483}
+  speedPenalty: 1.5
+  decreaseSpawnInterval: 0.1
+  increaseScale: 0.1
+  speedMultiplier: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
