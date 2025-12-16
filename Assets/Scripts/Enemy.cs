@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     {
         _gameDifficulty = gameDifficulty;
         
-        _gameDifficulty.OnSpeedChange += UpdateSpikeGravity;
+        _gameDifficulty.OnSpikeSpeedChange += UpdateSpikeGravity;
          UpdateSpikeGravity(_gameDifficulty.speedMultiplier);
     }
 
@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
     private void OnDisable()
     {
         if (_gameDifficulty != null)
-            _gameDifficulty.OnSpeedChange -= UpdateSpikeGravity;
+            _gameDifficulty.OnSpikeSpeedChange -= UpdateSpikeGravity;
     }
 
 

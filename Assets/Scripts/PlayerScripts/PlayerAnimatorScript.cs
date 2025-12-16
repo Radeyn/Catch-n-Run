@@ -2,17 +2,24 @@ using UnityEngine;
 
 public class PlayerAnimatorScript : MonoBehaviour
 {
-    private Animator animator;
-    public PlayerControl playerControl;
+    [SerializeField] Animator animator;
+    [SerializeField] PlayerControl playerControl;
 
     void Start()
     {
         playerControl = GetComponent<PlayerControl>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        RunAnimation();
+    }
+    private void RunAnimation()
+    {
+        if (playerControl.isMoving != false)
+        {
+            animator.Play("Run");
+
+        }
     }
 }

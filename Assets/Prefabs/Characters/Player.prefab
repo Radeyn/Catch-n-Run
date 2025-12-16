@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3393298902389403653}
   - component: {fileID: 8627159202799406183}
+  - component: {fileID: 5988425128874139744}
   m_Layer: 8
   m_Name: Frog
   m_TagString: Untagged
@@ -90,6 +91,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5988425128874139744
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030907817043622343}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1ce4557d15276e943bb81841d816e7e4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5113727284765378406
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,13 +125,12 @@ GameObject:
   - component: {fileID: 5146790269309386503}
   - component: {fileID: 6431459135229469589}
   - component: {fileID: 4114625389779825310}
-  - component: {fileID: 3864173258546350000}
   - component: {fileID: 1397330810469459399}
   - component: {fileID: 5243016487399941272}
   - component: {fileID: 4841195706157787111}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb34a70629afffc489be6b5f80359bdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimatorScript
+  animator: {fileID: 5988425128874139744}
   playerControl: {fileID: 6431459135229469589}
 --- !u!114 &6431459135229469589
 MonoBehaviour:
@@ -172,29 +195,7 @@ MonoBehaviour:
   maxHealth: 4
   maxSpeed: 25
   ScaleX: 1
-  animator: {fileID: 3864173258546350000}
---- !u!95 &3864173258546350000
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5113727284765378406}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1ce4557d15276e943bb81841d816e7e4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  animator: {fileID: 5988425128874139744}
 --- !u!114 &1397330810469459399
 MonoBehaviour:
   m_ObjectHideFlags: 0

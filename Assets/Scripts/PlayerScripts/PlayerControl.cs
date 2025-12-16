@@ -9,7 +9,7 @@ public class PlayerControl : MonoBehaviour
     private PlayerInput _playerInput;
     private InputAction _moveAction;
 
-    public bool isMoving;
+    public bool isMoving {get; private set;}
     public Vector2 moveInput;
 
     private void Awake()
@@ -17,6 +17,11 @@ public class PlayerControl : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _playerInput = GetComponent<PlayerInput>();
         _moveAction = _playerInput.actions["Move"];
+    }
+
+    private void Start()
+    {
+        isMoving = false;
     }
 
     private void Update()
@@ -34,14 +39,15 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Fiziksel hareket
-        Vector2 movement = moveInput.normalized * playerStatus.CurrentSpeed;
-        _rigidbody.linearVelocity = movement;
+        IsMoving();
     }
 
     public bool IsMoving()
     {
-        return isMoving;
+        Vector2 movement = moveInput.normalized * playerStatus.CurrentSpeed;
+        _rigidbody.linearVelocity = movement;
+        
+        return isMoving = true;
     }
 
     public void IncreaseSpeed(float amount)

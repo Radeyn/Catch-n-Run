@@ -4,12 +4,13 @@ using UnityEngine;
 public class GameDifficulty : MonoBehaviour
 {
     [SerializeField] private Score score;
-    [SerializeField] private SpawnScript spawnScript;
-    
+    [SerializeField] private float speedPenalty = 1.5f;
+    [SerializeField] SpawnScript spawnScript;
     private int nextThreshold = 200;
-    public float speedMultiplier = 1;
+    public float speedMultiplier { get; private set; } = 1;
     
-    public event Action<float> OnSpeedChange;
+    public event Action<float> OnSpikeSpeedChange;
+    public event Action<float> OnPlayerSpeedPenalty;
 
     private void Start()
     {
@@ -24,21 +25,25 @@ public class GameDifficulty : MonoBehaviour
             nextThreshold += 200;
         }
     }
-
+    
     private void IncreaseDiffucilty()
     {
         spawnScript.DecreaseSpawnInterval(0.1f);
-        SpeedChange();
+        PlayerSpeedChange();
+        SpikeSpeedChange();
         
         Debug.Log("Spawn Increased");    
     }
 
-    private void SpeedChange()
+    private void SpikeSpeedChange()
     {
         speedMultiplier += 0.1f;
-        OnSpeedChange?.Invoke(speedMultiplier);
-        
-        
+        OnSpikeSpeedChange?.Invoke(speedMultiplier);
+    }
+
+    private void PlayerSpeedChange()
+    {
+        OnPlayerSpeedPenalty?.Invoke(speedPenalty);
     }
     
 }

@@ -27,7 +27,6 @@
         private void Start()
         {  
             StartCoroutine(SpawnObjects());
-            
         }
 
         private void Update()
@@ -94,12 +93,11 @@
                 
             }
             
-           
         }
 
         private void StopSpawning()
         {
-            if (playerStatus._isDead)
+            if (playerStatus.IsDead)
             {
                 StopAllCoroutines();
             }
@@ -108,10 +106,5 @@
         public void DecreaseSpawnInterval(float amount)
         {
             _maxSpawnInterval = Mathf.Max(_minSpawnInterval, _maxSpawnInterval - amount);
-        }
-
-        public void ResetSpawnInterval()
-        {
-            _maxSpawnInterval = 1.5f;
         }
     }

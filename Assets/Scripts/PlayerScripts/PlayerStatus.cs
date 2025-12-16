@@ -1,37 +1,55 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerStatus : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 4;
-    [SerializeField] private int maxSpeed = 25;
-    public float ScaleX = 1f;
     
-    public Animator animator;
+    [SerializeField] int maxHealth = 4;
+    [SerializeField] int minHealth = 0;
+    
+    [SerializeField] int maxSpeed = 25;
+    [SerializeField] int minSpeed = 10;
+    
+    [SerializeField] GameDifficulty gameDifficulty;
+    [SerializeField] Animator animator;
+
+    public float ScaleX { get; private set; } = 1f;
     public int CurrentHealth { get; private set; }
-    public float CurrentSpeed {get; private set;}
+    [SerializeField] public float CurrentSpeed;
     
-    public bool _isDead {get; private set;}
+    public bool IsDead {get; private set;}
+    
     private void Start()
     {
         CurrentHealth = maxHealth;
         CurrentSpeed =  maxSpeed;
+        
+        Subscribe(gameDifficulty);
     }
-
     void Update()
     {
         KillChar();
     }
+    public void Subscribe(GameDifficulty difficulty)
+    {
+        difficulty.OnPlayerSpeedPenalty += LowerSpeed;
+    }
+    private void LowerSpeed(float penalty)
+    {
+        CurrentSpeed = Mathf.Max(minSpeed, CurrentSpeed - penalty);
+    }
+    
     public void TakeDamage(int damage)
     {
-        if  (_isDead) return;
+        if (IsDead) return;
         
         CurrentHealth -= damage;
         animator.SetTrigger("GetHit");
         if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;
-            _isDead = true;
+            IsDead = true;
         }
 
     }
@@ -41,13 +59,13 @@ public class PlayerStatus : MonoBehaviour
         if (Keyboard.current.kKey.wasPressedThisFrame)
         {
             CurrentHealth -= 4;
-            _isDead = true;
+            IsDead = true;
         }
     }
-
+    
     public void Heal(int health)
     {
-        if (_isDead) return; // Cant heal if its dead
+        if (IsDead) return; // Cant heal if its dead
 
         CurrentHealth += health;
         if (CurrentHealth > maxHealth )

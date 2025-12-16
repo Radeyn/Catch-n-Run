@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 107373551}
   - component: {fileID: 107373553}
   - component: {fileID: 107373552}
+  - component: {fileID: 107373554}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -255,6 +256,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107373550}
   m_CullTransparentMesh: 1
+--- !u!114 &107373554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107373550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942422ba72a02ab46854b6583a80e9ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreUI
+  score: {fileID: 677045788}
+  scoreText: {fileID: 107373552}
+  totalScoreText: {fileID: 1064382332}
 --- !u!1 &158085404
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,8 +787,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameDifficulty
   score: {fileID: 677045788}
+  speedPenalty: 1.5
   spawnScript: {fileID: 1077157483}
-  speedMultiplier: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -5405,6 +5421,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4114625389779825310, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+      propertyPath: gameDifficulty
+      value: 
+      objectReference: {fileID: 504801496}
     - target: {fileID: 4226770154895069040, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5447,10 +5467,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5113727284765378406, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
       propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5113727284765378406, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
-      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -3,7 +3,7 @@ using TMPro;
 
 public class ScoreUI : MonoBehaviour
 {
-    [SerializeField]private GameObject gameManager;
+    [SerializeField]private Score score;
     private Score _score;
     private int _previousScore;
     
@@ -25,6 +25,6 @@ public class ScoreUI : MonoBehaviour
     }
     private void GetReferences()
     {
-        _score = gameManager.GetComponent<Score>();
+        _score = score.GetComponent<Score>();
     }
 }
