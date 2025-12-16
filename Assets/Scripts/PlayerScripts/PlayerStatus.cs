@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class PlayerStatus : MonoBehaviour
         CurrentHealth = maxHealth;
         CurrentSpeed =  maxSpeed;
     }
+
+    void Update()
+    {
+        KillChar();
+    }
     public void TakeDamage(int damage)
     {
         if  (_isDead) return;
@@ -27,8 +33,18 @@ public class PlayerStatus : MonoBehaviour
             CurrentHealth = 0;
             _isDead = true;
         }
+
     }
-    
+
+    private void KillChar()
+    {
+        if (Keyboard.current.kKey.wasPressedThisFrame)
+        {
+            CurrentHealth -= 4;
+            _isDead = true;
+        }
+    }
+
     public void Heal(int health)
     {
         if (_isDead) return; // Cant heal if its dead
