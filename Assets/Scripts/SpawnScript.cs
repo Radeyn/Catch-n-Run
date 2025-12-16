@@ -27,13 +27,19 @@
         private void Start()
         {  
             StartCoroutine(SpawnObjects());
+            
+            Subscribe(gameDifficulty);
         }
 
         private void Update()
         {
             StopSpawning();
         }
-
+    
+        private void Subscribe(GameDifficulty difficulty)
+        {
+            difficulty.OnSpawnSpeedChange += DecreaseSpawnInterval;
+        }
         public IEnumerator SpawnObjects()
         {
             yield return new WaitForSeconds(_startTimer);
@@ -94,7 +100,6 @@
             }
             
         }
-
         private void StopSpawning()
         {
             if (playerStatus.IsDead)
@@ -102,9 +107,11 @@
                 StopAllCoroutines();
             }
         }
-
-        public void DecreaseSpawnInterval(float amount)
+        public void DecreaseSpawnInterval(float decreaseSpawnInterval)
         {
-            _maxSpawnInterval = Mathf.Max(_minSpawnInterval, _maxSpawnInterval - amount);
+            
+            _maxSpawnInterval = Mathf.Max(_minSpawnInterval, _maxSpawnInterval - decreaseSpawnInterval);
+            Debug.Log("Spawn Interval: "  + _maxSpawnInterval);    
+            
         }
     }

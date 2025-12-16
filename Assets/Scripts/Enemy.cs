@@ -2,9 +2,8 @@
 
 public class Enemy : MonoBehaviour
 {
-    
-    private GameDifficulty _gameDifficulty;
-    PlayerStatus _playerStatus;
+    private GameDifficulty gameDifficulty;
+    private PlayerStatus _playerStatus;
     private Rigidbody2D _rigidbody;
     private float baseGravity= 1f;
     
@@ -14,32 +13,19 @@ public class Enemy : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
     }
     
-
     public void SetPlayer(PlayerStatus playerStatus)
     {
         _playerStatus = playerStatus;
     }
-    public void SetDifficulty(GameDifficulty gameDifficulty)
+    
+    public void SetDifficulty(GameDifficulty difficulty)
     {
-        _gameDifficulty = gameDifficulty;
-        
-        _gameDifficulty.OnSpikeSpeedChange += UpdateSpikeGravity;
-         UpdateSpikeGravity(_gameDifficulty.speedMultiplier);
-    }
-
-    private void UpdateSpikeGravity(float speedMultiplier)
-    {
-        _rigidbody.gravityScale = baseGravity * speedMultiplier;
+        gameDifficulty = difficulty;
+        difficulty.OnSpikeSpeedChange += UpdateSpikeGravity;
         
     }
     
-    private void OnDisable()
-    {
-        if (_gameDifficulty != null)
-            _gameDifficulty.OnSpikeSpeedChange -= UpdateSpikeGravity;
-    }
-
-
+    
     private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.CompareTag("Player"))
@@ -58,7 +44,11 @@ public class Enemy : MonoBehaviour
             }
 
         }
-
+    private void UpdateSpikeGravity(float decreaseSpawnInterval)
+        {
+            _rigidbody.gravityScale = baseGravity * decreaseSpawnInterval;
+            Debug.Log("Gravity Scale: " + _rigidbody.gravityScale);
+        }
 
    
 }

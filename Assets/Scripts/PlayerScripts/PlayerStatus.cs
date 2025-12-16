@@ -31,14 +31,11 @@ public class PlayerStatus : MonoBehaviour
     {
         KillChar();
     }
-    public void Subscribe(GameDifficulty difficulty)
+    private void Subscribe(GameDifficulty difficulty)
     {
         difficulty.OnPlayerSpeedPenalty += LowerSpeed;
     }
-    private void LowerSpeed(float penalty)
-    {
-        CurrentSpeed = Mathf.Max(minSpeed, CurrentSpeed - penalty);
-    }
+   
     
     public void TakeDamage(int damage)
     {
@@ -74,5 +71,10 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
+    private void LowerSpeed(float penalty)
+    {
+        CurrentSpeed = Mathf.Max(minSpeed, CurrentSpeed - penalty);
+        Debug.Log("Speed Decreased: " + CurrentSpeed);
+    }
     
 }
