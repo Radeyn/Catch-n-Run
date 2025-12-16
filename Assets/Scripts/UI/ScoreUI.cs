@@ -3,28 +3,24 @@ using TMPro;
 
 public class ScoreUI : MonoBehaviour
 {
-    [SerializeField]private Score score;
-    private Score _score;
-    private int _previousScore;
-    
+    [SerializeField] private Score score;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI totalScoreText;
 
+    private float displayedScore;
+    [SerializeField] float animationSpeed = 1.5f;
+
     private void Start()
     {
-        GetReferences();
+        displayedScore = score.score;
     }
 
     private void Update()
     {
-        if (_score.score == _previousScore) return;
-        _previousScore = _score.score;
-        scoreText.text = _previousScore.ToString();
+        displayedScore = Mathf.Lerp(displayedScore, score.score, animationSpeed * Time.deltaTime
+        );
 
-        totalScoreText.text = _score.score.ToString();
-    }
-    private void GetReferences()
-    {
-        _score = score.GetComponent<Score>();
+        scoreText.text = displayedScore.ToString("0");
+        totalScoreText.text = score.score.ToString();
     }
 }

@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class Score : MonoBehaviour
 {
-    public event Action<int> OnScoreChanged;
+    public event Action<float> OnScoreChanged;
     
-    public  int score = 0;
+    public  float score = 0;
     
-    public void AddScore(int amount)
+    public void AddScore(float amount)
     {
         score += amount;
         OnScoreChanged?.Invoke(score);
     }
 
-    public int GetScore()
+    public float GetScore()
     {
         return score;
     }

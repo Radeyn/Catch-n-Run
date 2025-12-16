@@ -24,7 +24,7 @@ public class GameDifficulty : MonoBehaviour
         score.OnScoreChanged += HandleScoreChange;
     }
 
-    private void HandleScoreChange(int currentScore)
+    private void HandleScoreChange(float currentScore)
     {
         if (currentScore >= nextThreshold)
         {
