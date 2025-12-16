@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameOver : MonoBehaviour
 {
+    [SerializeField]private PlayerStatus _playerStatus;
+    
     private Animator firstHeartAnimator;
     private Animator secondHeartAnimator;
     private Animator thirdHeartAnimator;
     private Animator lastHeartAnimator;
-    private Player player;
 
     public GameObject firstHeart;
     public GameObject secondHeart;
@@ -26,18 +28,19 @@ public class GameOver : MonoBehaviour
 
 
         // Oyuncuyu bul
-        player = FindAnyObjectByType<Player>();
-        if (player == null)
+        if (_playerStatus == null)
         {
-            Debug.LogError("Player script not found!");
+          //  Debug.LogError("Player script not found!");
         }
     }
 
-    void Update()
+    private void Update()
     {
-        if (player == null) return;  // Oyuncu yoksa hata vermemesi için kontrol
+        PauseGame();
+        
+        if (!_playerStatus) return;  // Oyuncu yoksa hata vermemesi için kontrol
 
-        float playerHealth = player.playerHealth;
+        float playerHealth = _playerStatus.CurrentHealth;
 
 
         if (playerHealth < 4)
@@ -77,24 +80,24 @@ public class GameOver : MonoBehaviour
         { 
             lastHeartAnimator.SetBool("HeartEmpty", false);
         }
-        }
+    }
 
-        IEnumerator GameOverSequence()
-        {
+    IEnumerator GameOverSequence()
+    {
             
 
             
 
-            float animTime = lastHeartAnimator.GetCurrentAnimatorStateInfo(0).length;
+        float animTime = lastHeartAnimator.GetCurrentAnimatorStateInfo(0).length;
 
-            yield return new WaitForSecondsRealtime(animTime); //
+        yield return new WaitForSecondsRealtime(animTime); //
 
 
 
-            Time.timeScale = 0; 
-            gameOverUI.SetActive(true); 
+        Time.timeScale = 0; 
+        gameOverUI.SetActive(true); 
 
-        }
+    }
     public void ResetAnimation()
     {
 
@@ -103,6 +106,15 @@ public class GameOver : MonoBehaviour
         thirdHeartAnimator.SetBool("HeartEmpty", false);
         lastHeartAnimator.SetBool("HeartEmpty", false);
         
+    }
+
+    void PauseGame()
+    {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            Time.timeScale = 0;
+            gameOverUI.SetActive(true);
+        }
     }
 }
 
