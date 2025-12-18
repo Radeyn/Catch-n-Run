@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    private PlayerControl _playerControl;
+    private PlayerMovement _playerControl;
     
     [SerializeField] AudioSource damageSound;
     [SerializeField] AudioSource eatingSound;
     [SerializeField] AudioSource footstepsSound;
     private void Start()
     {
-        _playerControl = GetComponent<PlayerControl>();
+        _playerControl = GetComponent<PlayerMovement>();
     }
     
     private void OnCollisionEnter2D(Collision2D collision)
@@ -24,23 +24,24 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        WalkingSound();
-    }
+    //private void update()
+    //{
+    //    walkingsfx();
+    //}
 
-    private void WalkingSound()
-    {
-        if (_playerControl.IsMoving())
-        {
-            if (!footstepsSound.isPlaying) 
-            {
-                footstepsSound.Play();
-            }
-        }else
-        {
-            footstepsSound.Stop();
+    //private void walkingsfx()
+    //{
+    //    if (_playercontrol.ismoving)
+    //    {
+    //        if (!footstepssound.isplaying)
+    //        {
+    //            footstepssound.play();
+    //        }
+    //    }
+    //    else
+    //    {
+    //        footstepssound.stop();
 
-        }
-    }
+    //    }
+    //}
 }

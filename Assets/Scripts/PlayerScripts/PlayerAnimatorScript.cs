@@ -3,11 +3,11 @@ using UnityEngine;
 public class PlayerAnimatorScript : MonoBehaviour
 {
     [SerializeField] Animator animator;
-    [SerializeField] PlayerControl playerControl;
+    [SerializeField] PlayerMovement playerMovement;
 
     void Start()
     {
-        playerControl = GetComponent<PlayerControl>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void Update()
@@ -16,10 +16,14 @@ public class PlayerAnimatorScript : MonoBehaviour
     }
     private void RunAnimation()
     {
-        if (playerControl.isMoving != false)
+        if (playerMovement.isMoving != false)
         {
             animator.Play("Run");
 
+        }
+        else if (playerMovement.isMoving == false)
+        {
+            animator.Play("Idle");
         }
     }
 }

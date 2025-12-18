@@ -4395,6 +4395,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5938be4aa7cf5ef41b5823eefcf80b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
+--- !u!114 &1683478242 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6431459135229469589, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+  m_PrefabInstance: {fileID: 297808127751014514}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5290100d1a0537d45b53d0aab3f007be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerControl
 --- !u!1 &1699804345
 GameObject:
   m_ObjectHideFlags: 0
@@ -5444,6 +5455,58 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2874714375255618067, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+      propertyPath: m_NotificationBehavior
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874714375255618067, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874714375255618067, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_ActionId
+      value: a17224b7-2d3c-4733-8074-8c1b9df7b000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874714375255618067, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_ActionId
+      value: a26b8c21-8bba-4777-a10d-202c2435f922
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874714375255618067, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_ActionName
+      value: 'Player/Move[/Keyboard/a,/Keyboard/d]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874714375255618067, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_ActionName
+      value: 'Player/Jump[/Keyboard/space]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874714375255618067, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874714375255618067, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874714375255618067, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1683478242}
+    - target: {fileID: 2874714375255618067, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874714375255618067, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874714375255618067, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerMovement, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874714375255618067, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4114625389779825310, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
       propertyPath: gameDifficulty
       value: 
@@ -5493,22 +5556,23 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6431459135229469589, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
-      propertyPath: jumpForce
-      value: 10
-      objectReference: {fileID: 0}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 297808127751014515}
     - target: {fileID: 6431459135229469589, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
       propertyPath: moveSpeed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6431459135229469589, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
-      propertyPath: fallingForce
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+--- !u!50 &297808127751014515 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 5243016487399941272, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+  m_PrefabInstance: {fileID: 297808127751014514}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
