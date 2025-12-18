@@ -271,6 +271,7 @@ MonoBehaviour:
   score: {fileID: 677045788}
   scoreText: {fileID: 107373552}
   totalScoreText: {fileID: 1064382332}
+  animationSpeed: 1.5
 --- !u!1 &158085404
 GameObject:
   m_ObjectHideFlags: 0
@@ -2342,6 +2343,7 @@ MonoBehaviour:
   gameDifficulty: {fileID: 504801496}
   fruitPool: {fileID: 1559604115}
   enemyPool: {fileID: 1559604116}
+  itemPool: {fileID: 1559604117}
   spawnPoint:
   - {fileID: 2016623756}
   - {fileID: 789058270}
@@ -3609,6 +3611,7 @@ GameObject:
   - component: {fileID: 1559604114}
   - component: {fileID: 1559604116}
   - component: {fileID: 1559604115}
+  - component: {fileID: 1559604117}
   m_Layer: 0
   m_Name: ObjectPools
   m_TagString: Untagged
@@ -3670,6 +3673,22 @@ MonoBehaviour:
   objectPoolSize: 1
   objectPrefabs:
   - {fileID: 1319835209284445176, guid: 6b681e543ec78634fb99d32e76e606b0, type: 3}
+--- !u!114 &1559604117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559604111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7acc2e8520210e44999bb67ecb64b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemPool
+  objectPool: []
+  objectPoolSize: 1
+  objectPrefabs:
+  - {fileID: 7040680886257671881, guid: 60a9cfad1a0ee1743a090e4b191bbd1e, type: 3}
 --- !u!1 &1573318013
 GameObject:
   m_ObjectHideFlags: 0

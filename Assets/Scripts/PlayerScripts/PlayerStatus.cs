@@ -6,14 +6,15 @@ public class PlayerStatus : MonoBehaviour
 {
     
     [SerializeField] int maxHealth = 4;
-    [SerializeField] int minHealth = 0;
     
     [SerializeField] int maxSpeed = 25;
     [SerializeField] int minSpeed = 10;
     
-    [SerializeField] GameDifficulty gameDifficulty;
     [SerializeField] Animator animator;
-
+    
+    [SerializeField]GameDifficulty gameDifficulty;
+    
+    
     public float ScaleX { get; private set; } = 1f;
     private float maxScaleX = 3f;
     public int CurrentHealth { get; private set; }

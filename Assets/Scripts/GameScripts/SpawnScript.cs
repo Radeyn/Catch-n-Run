@@ -1,6 +1,4 @@
-﻿    using System;
-    using System.Collections;
-    using System.Collections.Generic;
+﻿    using System.Collections;
     using UnityEngine;
     using Random = UnityEngine.Random;
 
@@ -12,21 +10,20 @@
         
         [SerializeField] private FruitPool fruitPool;
         [SerializeField] private EnemyPool enemyPool;
+        [SerializeField] private ItemPool itemPool;
         
         [SerializeField] private Transform[] spawnPoint;
 
+        [SerializeField] private int healthCooldown = 10;
         private int _startTimer = 3;
-
-
+        
         private float _minSpawnInterval = 0.1f;
         private float _maxSpawnInterval = 1.5f; 
-
-
-
         
         private void Start()
         {  
             StartCoroutine(SpawnObjects());
+            StartCoroutine(SpawnHealth());
             
             Subscribe(gameDifficulty);
         }
@@ -49,11 +46,26 @@
                 SpawnEnemy();
                 SpawnFruit();
                 yield return new WaitForSeconds(Random.Range(_minSpawnInterval, _maxSpawnInterval));
+
             }
-        }            
+        }
+
+        private IEnumerator SpawnHealth()
+        {
+            yield return new WaitForSeconds(_startTimer);
+            
+            while (true)
+            {
+                SpawnHealthObject();
+                
+                yield return new WaitForSeconds(healthCooldown);
+                
+            }
+            
+        }
 
 
-        public void SpawnFruit()
+        private void SpawnFruit()
         {
             int randomIndex = Random.Range(0, spawnPoint.Length);
 
@@ -81,7 +93,7 @@
             }
         }
         
-        public void SpawnEnemy()
+        private void SpawnEnemy()
         {
             int randomIndex = Random.Range(0, spawnPoint.Length);
             
@@ -99,7 +111,27 @@
                 
             }
             
+        } 
+        private void SpawnHealthObject()
+        {
+            int randomIndex = Random.Range(0, spawnPoint.Length);
+            
+            GameObject healthObj = itemPool.GetPooledObject();
+
+            if (healthObj != null && playerStatus.CurrentHealth < 4)
+            {
+                healthObj.transform.position = spawnPoint[randomIndex].position;
+                
+                HealthScript healItem = healthObj.GetComponent<HealthScript>();
+                
+                healItem.SetPlayer(playerStatus);
+                healthObj.SetActive(true);
+                
+            }
+            
         }
+        
+        
         private void StopSpawning()
         {
             if (playerStatus.IsDead)
@@ -107,7 +139,7 @@
                 StopAllCoroutines();
             }
         }
-        public void DecreaseSpawnInterval(float decreaseSpawnInterval)
+        private void DecreaseSpawnInterval(float decreaseSpawnInterval)
         {
             
             _maxSpawnInterval = Mathf.Max(_minSpawnInterval, _maxSpawnInterval - decreaseSpawnInterval);

@@ -17,8 +17,7 @@ public class ScoreUI : MonoBehaviour
 
     private void Update()
     {
-        displayedScore = Mathf.Lerp(displayedScore, score.score, animationSpeed * Time.deltaTime
-        );
+        displayedScore = Mathf.Lerp(displayedScore, score.score, animationSpeed * Time.deltaTime);
 
         scoreText.text = displayedScore.ToString("0");
         totalScoreText.text = score.score.ToString();
