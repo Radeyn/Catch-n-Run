@@ -74,6 +74,7 @@
         {
             yield return new WaitForSeconds(_startTimer);
 
+            yield return new WaitUntil(() => score.score >= 2000);
             while (true)
             {
                 SpawnSaw();
