@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class SpikeBall : MonoBehaviour
 {
     private GameDifficulty gameDifficulty;
     private PlayerStatus _playerStatus;

@@ -9,10 +9,12 @@
         [SerializeField]private GameDifficulty gameDifficulty;
         
         [SerializeField] private FruitPool fruitPool;
-        [SerializeField] private EnemyPool enemyPool;
+        [SerializeField] private SpikeBallPool spikeBallPool;
+        [SerializeField] private SawPool sawPool;
         [SerializeField] private ItemPool itemPool;
         
         [SerializeField] private Transform[] spawnPoint;
+        [SerializeField] public Transform[] sawSpawnPoints;
 
         [SerializeField] private int healthCooldown = 10;
         private int _startTimer = 3;
@@ -43,7 +45,8 @@
 
             while (true)
             {
-                SpawnEnemy();
+                SpawnSpikeBall();
+                SpawnSaw();
                 SpawnFruit();
                 yield return new WaitForSeconds(Random.Range(_minSpawnInterval, _maxSpawnInterval));
 
@@ -93,26 +96,44 @@
             }
         }
         
-        private void SpawnEnemy()
+        private void SpawnSpikeBall()
         {
             int randomIndex = Random.Range(0, spawnPoint.Length);
             
-            GameObject enemyObj = enemyPool.GetPooledObject();
+            GameObject spikeBallObj = spikeBallPool.GetPooledObject();
 
-            if (enemyObj != null)
+            if (spikeBallObj != null)
             {
-                enemyObj.transform.position = spawnPoint[randomIndex].position;
+                spikeBallObj.transform.position = spawnPoint[randomIndex].position;
                 
-                Enemy enemy = enemyObj.GetComponent<Enemy>();
+                SpikeBall spikeBall = spikeBallObj.GetComponent<SpikeBall>();
                 
-                enemy.SetPlayer(playerStatus);
-                enemy.SetDifficulty(gameDifficulty);
-                enemyObj.SetActive(true);
+                spikeBall.SetPlayer(playerStatus);
+                spikeBall.SetDifficulty(gameDifficulty);
+                spikeBallObj.SetActive(true);
                 
             }
             
         } 
-        private void SpawnHealthObject()
+
+        private void SpawnSaw()
+        {
+            int randomIndex = Random.Range(0, sawSpawnPoints.Length);
+            
+            GameObject sawObj = sawPool.GetPooledObject();
+
+            if(sawObj != null)
+            {              
+                sawObj.transform.position = sawSpawnPoints[randomIndex].position;
+
+                Saw saw = sawObj.GetComponent<Saw>();
+                saw.SetDirection(randomIndex);
+                saw.SetPlayer(playerStatus);
+                sawObj.SetActive(true);
+             }
+
+    }
+    private void SpawnHealthObject()
         {
             int randomIndex = Random.Range(0, spawnPoint.Length);
             
