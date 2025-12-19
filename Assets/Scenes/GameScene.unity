@@ -566,7 +566,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -2533,6 +2533,7 @@ MonoBehaviour:
   - {fileID: 2117054405}
   - {fileID: 844433550}
   healthCooldown: 10
+  sawSpawnCooldown: 5
 --- !u!1 &1128262404
 GameObject:
   m_ObjectHideFlags: 0
@@ -4566,7 +4567,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4114625389779825310, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
   m_PrefabInstance: {fileID: 297808127751014514}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1783683812}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5938be4aa7cf5ef41b5823eefcf80b9b, type: 3}
@@ -4747,23 +4748,6 @@ MonoBehaviour:
   countdownText: {fileID: 1699804348}
   countdown: {fileID: 649749385}
   spawnScript: {fileID: 1077157483}
---- !u!1 &1783683812 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5113727284765378406, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
-  m_PrefabInstance: {fileID: 297808127751014514}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1783683818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1783683812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcc18507d8df02140913be479069169b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InvulnerabilityFrames
 --- !u!1 &1800622861
 GameObject:
   m_ObjectHideFlags: 0
@@ -5157,7 +5141,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -5776,26 +5760,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6431459135229469589, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
-      propertyPath: jumpForce
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6431459135229469589, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
-      propertyPath: moveSpeed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6431459135229469589, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
-      propertyPath: fallingForce
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 6778306867418215324, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5113727284765378406, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
-      insertIndex: 4
-      addedObject: {fileID: 1783683818}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd3a8fef59e802a469ac1933111ab12b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

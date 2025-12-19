@@ -14,9 +14,10 @@
         [SerializeField] private ItemPool itemPool;
         
         [SerializeField] private Transform[] spawnPoint;
-        [SerializeField] public Transform[] sawSpawnPoints;
+        [SerializeField] private Transform[] sawSpawnPoints;
 
         [SerializeField] private int healthCooldown = 10;
+        [SerializeField] private float sawSpawnCooldown = 5f;
         private int _startTimer = 3;
         
         private float _minSpawnInterval = 0.1f;
@@ -26,13 +27,16 @@
         {  
             StartCoroutine(SpawnObjects());
             StartCoroutine(SpawnHealth());
-            
+            StartCoroutine(SpawnSawObjects());
+
             Subscribe(gameDifficulty);
         }
 
         private void Update()
         {
             StopSpawning();
+
+            
         }
     
         private void Subscribe(GameDifficulty difficulty)
@@ -46,7 +50,6 @@
             while (true)
             {
                 SpawnSpikeBall();
-                SpawnSaw();
                 SpawnFruit();
                 yield return new WaitForSeconds(Random.Range(_minSpawnInterval, _maxSpawnInterval));
 
@@ -67,8 +70,20 @@
             
         }
 
+        private IEnumerator SpawnSawObjects()
+        {
+            yield return new WaitForSeconds(_startTimer);
 
-        private void SpawnFruit()
+            while (true)
+            {
+                SpawnSaw();
+
+                yield return new WaitForSeconds(sawSpawnCooldown);
+            }       
+        }
+
+
+    private void SpawnFruit()
         {
             int randomIndex = Random.Range(0, spawnPoint.Length);
 
@@ -127,30 +142,31 @@
                 sawObj.transform.position = sawSpawnPoints[randomIndex].position;
 
                 Saw saw = sawObj.GetComponent<Saw>();
+
                 saw.SetDirection(randomIndex);
                 saw.SetPlayer(playerStatus);
                 sawObj.SetActive(true);
              }
 
-    }
-    private void SpawnHealthObject()
-        {
-            int randomIndex = Random.Range(0, spawnPoint.Length);
-            
-            GameObject healthObj = itemPool.GetPooledObject();
-
-            if (healthObj != null && playerStatus.CurrentHealth < 4)
-            {
-                healthObj.transform.position = spawnPoint[randomIndex].position;
-                
-                HealthScript healItem = healthObj.GetComponent<HealthScript>();
-                
-                healItem.SetPlayer(playerStatus);
-                healthObj.SetActive(true);
-                
-            }
-            
         }
+        private void SpawnHealthObject()
+            {
+                int randomIndex = Random.Range(0, spawnPoint.Length);
+            
+                GameObject healthObj = itemPool.GetPooledObject();
+
+                if (healthObj != null && playerStatus.CurrentHealth < 4)
+                {
+                    healthObj.transform.position = spawnPoint[randomIndex].position;
+                
+                    HealthScript healItem = healthObj.GetComponent<HealthScript>();
+                
+                    healItem.SetPlayer(playerStatus);
+                    healthObj.SetActive(true);
+                
+                }
+            
+            }
         
         
         private void StopSpawning()

@@ -194,6 +194,7 @@ GameObject:
   - component: {fileID: 5146790269309386503}
   - component: {fileID: 6431459135229469589}
   - component: {fileID: 4114625389779825310}
+  - component: {fileID: 6051595620952220935}
   - component: {fileID: 5243016487399941272}
   - component: {fileID: 2874714375255618067}
   m_Layer: 8
@@ -247,8 +248,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerControl
   rb: {fileID: 5243016487399941272}
-  moveSpeed: 25
-  jumpForce: 5
+  moveSpeed: 15
+  jumpForce: 15
+  fallingForce: 20
   horizontalInput: 0
   groundLayer:
     serializedVersion: 2
@@ -268,11 +270,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
   maxHealth: 4
-  maxSpeed: 25
-  minSpeed: 10
   animator: {fileID: 5988425128874139744}
   gameDifficulty: {fileID: 0}
-  CurrentSpeed: 0
+  invulnerabilityFrames: {fileID: 6051595620952220935}
+--- !u!114 &6051595620952220935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5113727284765378406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcc18507d8df02140913be479069169b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InvulnerabilityFrames
+  iFramesDuration: 1
+  numberOfFlashes: 3
+  frog: {fileID: 1030907817043622343}
 --- !u!50 &5243016487399941272
 Rigidbody2D:
   serializedVersion: 5
@@ -392,84 +407,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4295537716663976875}
-  - {fileID: 7557603177772647375}
   m_Father: {fileID: 4226770154895069040}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6778306867418215324
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7557603177772647375}
-  - component: {fileID: 708642269459798422}
-  m_Layer: 8
-  m_Name: Feet
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7557603177772647375
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6778306867418215324}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.91, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 882368510665338389}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &708642269459798422
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6778306867418215324}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.9, y: 0.3}
-  m_EdgeRadius: 0

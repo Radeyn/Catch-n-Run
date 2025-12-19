@@ -4,28 +4,22 @@ using UnityEngine.InputSystem;
 
 public class PlayerStatus : MonoBehaviour
 {
-    
+    [Header("Player Stats")]
     [SerializeField] int maxHealth = 4;
-    
-    [SerializeField] int maxSpeed = 25;
-    [SerializeField] int minSpeed = 10;
-    
-    [SerializeField] Animator animator;
-    
-    [SerializeField]GameDifficulty gameDifficulty;
-    
-    
-    public float ScaleX { get; private set; } = 1f;
-    private float maxScaleX = 3f;
+    private float CurrentSpeed;
     public int CurrentHealth { get; private set; }
-    [SerializeField] public float CurrentSpeed;
+
+    [Header("References")]
+    [SerializeField] Animator animator;
+    [SerializeField] GameDifficulty gameDifficulty;
+    [SerializeField] InvulnerabilityFrames invulnerabilityFrames;
+    
     
     public bool IsDead {get; private set;}
     
     private void Start()
     {
         CurrentHealth = maxHealth;
-        CurrentSpeed =  maxSpeed;
         
         Subscribe(gameDifficulty);
     }
@@ -35,8 +29,8 @@ public class PlayerStatus : MonoBehaviour
     }
     private void Subscribe(GameDifficulty difficulty)
     {
-        difficulty.OnPlayerSpeedPenalty += LowerSpeed;
-        difficulty.OnScaleChange += IncreaseScale;
+        //difficulty.OnPlayerSpeedPenalty += LowerSpeed;
+        //difficulty.OnScaleChange += IncreaseScale;
     }
    
     
@@ -46,7 +40,8 @@ public class PlayerStatus : MonoBehaviour
         
         CurrentHealth -= damage;
         animator.SetTrigger("GetHit");
-        
+        StartCoroutine(invulnerabilityFrames.IFramesStart());
+
         if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;
@@ -75,16 +70,16 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
-    private void LowerSpeed(float penalty)
-    {
-        CurrentSpeed = Mathf.Max(minSpeed, CurrentSpeed - penalty);
-        Debug.Log("Speed Decreased: " + CurrentSpeed);
-    }
+    //private void LowerSpeed(float penalty)
+    //{
+    //    CurrentSpeed = Mathf.Max(minSpeed, CurrentSpeed - penalty);
+    //    Debug.Log("Speed Decreased: " + CurrentSpeed);
+    //}
 
-    private void IncreaseScale(float increaseScale)
-    {
-        ScaleX = Mathf.Min(maxScaleX, ScaleX + increaseScale);
-        Debug.Log("Scale Increased: " + ScaleX);
-    }
+    //private void IncreaseScale(float increaseScale)
+    //{
+    //    ScaleX = Mathf.Min(maxScaleX, ScaleX + increaseScale);
+    //    Debug.Log("Scale Increased: " + ScaleX);
+    //}
     
 }
