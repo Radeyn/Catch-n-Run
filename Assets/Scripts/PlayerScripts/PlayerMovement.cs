@@ -80,13 +80,10 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed && IsGrounded())
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-
-
         }
-
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
        
         if(Physics2D.BoxCast(transform.position, boxSize, 0f, -transform.up, castDistance, groundLayer))
