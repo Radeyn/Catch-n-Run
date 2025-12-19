@@ -14,15 +14,16 @@ public class PlayerAnimatorScript : MonoBehaviour
     {
         RunAnimation();
         JumpAnimation();
+        FallAnimation();
     }
     private void RunAnimation()
     {
-        if (playerMovement.isMoving != false && playerMovement.IsGrounded())
+        if (playerMovement.isMoving && playerMovement.IsGrounded())
         {
             animator.Play("Run");
 
         }
-        else if (playerMovement.isMoving == false && playerMovement.IsGrounded())
+        else if (!playerMovement.isMoving && playerMovement.IsGrounded())
         {
             animator.Play("Idle");
         }
@@ -30,13 +31,21 @@ public class PlayerAnimatorScript : MonoBehaviour
 
     private void JumpAnimation()
     {
-        if (playerMovement.IsGrounded() == false)
+        if (!playerMovement.IsGrounded() && !playerMovement.IsFalling())
         {
             animator.Play("Jump");
         }
-        else 
+        else
         {
             // Do nothing, let RunAnimation handle the state
+        }
+    }
+
+    private void FallAnimation()
+    {
+        if (playerMovement.IsFalling() && !playerMovement.IsGrounded())
+        {
+            animator.Play("Fall");
         }
     }
 }

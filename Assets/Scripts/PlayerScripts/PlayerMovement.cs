@@ -25,7 +25,9 @@ public class PlayerMovement : MonoBehaviour
     {
         MovePlayer();
         IsMoving();
+
         Falling();
+        
     }
 
     #region Movement
@@ -102,6 +104,18 @@ public class PlayerMovement : MonoBehaviour
         if (!IsGrounded())
         {
             rb.AddForce(Vector2.down * fallingForce);
+        }
+    }
+
+    public bool IsFalling()
+    {
+        if (rb.linearVelocity.y < 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
