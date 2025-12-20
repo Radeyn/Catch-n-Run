@@ -103,12 +103,14 @@
             if (littleFruit != null)
             {
                 littleFruit.SetReferences(score);
-            }
+                littleFruit.SetPlayer(playerStatus);
+        }
 
             BigFruit bigFruit = fruitObj.GetComponent<BigFruit>();
             if (bigFruit != null)
             {
                 bigFruit.SetReferences(score);
+                bigFruit.SetPlayer(playerStatus);
             }
         }
         
@@ -126,6 +128,7 @@
                 
                 spikeBall.SetPlayer(playerStatus);
                 spikeBall.SetDifficulty(gameDifficulty);
+                spikeBall.SetScore(score);
                 spikeBallObj.SetActive(true);
                 
             }

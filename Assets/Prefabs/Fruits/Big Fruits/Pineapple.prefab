@@ -105,6 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b794c8050cbd26d48bc4c7703a32bd7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BigFruit
+  textColor: {r: 0.7686275, g: 0.49803925, b: 0.25490198, a: 1}
+  floatingTextPrefab: {fileID: 1091902294112432257, guid: 33b9b1e4386f34049b2c5c1dcd452e0e, type: 3}
 --- !u!50 &-1094629526391193762
 Rigidbody2D:
   serializedVersion: 5

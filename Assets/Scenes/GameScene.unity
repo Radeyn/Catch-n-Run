@@ -271,7 +271,7 @@ MonoBehaviour:
   score: {fileID: 677045788}
   scoreText: {fileID: 107373552}
   totalScoreText: {fileID: 1064382332}
-  animationSpeed: 0.5
+  animationSpeed: 5
 --- !u!1 &158085404
 GameObject:
   m_ObjectHideFlags: 0

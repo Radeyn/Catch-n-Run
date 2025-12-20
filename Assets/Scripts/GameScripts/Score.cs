@@ -5,7 +5,7 @@ public class Score : MonoBehaviour
 {
     public event Action<float> OnScoreChanged;
     
-    public  float score = 0;
+    public float score = 0;
     
     public void AddScore(float amount)
     {
