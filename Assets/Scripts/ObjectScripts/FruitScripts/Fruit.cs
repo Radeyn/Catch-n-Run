@@ -8,7 +8,7 @@ public class Fruit : MonoBehaviour
     private Score _score;
     private PlayerStatus player;
     private Rigidbody2D _rigidbody2D;
-    private FruitPool _littleFruitSpawner;
+    private FruitPool _fruitSpawner;
     private int scoreValue = 40;
 
     
@@ -32,9 +32,9 @@ public class Fruit : MonoBehaviour
         player = playerStatus;
     }
 
-    public void SetFruit(FruitPool littleFruitSpawner)
+    public void SetFruit(FruitPool fruitSpawner)
     {
-        _littleFruitSpawner = littleFruitSpawner;
+        _fruitSpawner = fruitSpawner;
     }
 
     private void InstantiateFloatingText()
@@ -50,19 +50,19 @@ public class Fruit : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             _score.AddScore(scoreValue);
-            _littleFruitSpawner._littleFruitObjectPool.Release(this);
+            _fruitSpawner._fruitObjectPool.Release(this);
             InstantiateFloatingText();
 
         } 
         
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            _littleFruitSpawner._littleFruitObjectPool.Release(this);
+            _fruitSpawner._fruitObjectPool.Release(this);
         }
 
         else if (collision.gameObject.CompareTag("Floor"))
         {
-            _littleFruitSpawner._littleFruitObjectPool.Release(this);
+            _fruitSpawner._fruitObjectPool.Release(this);
         }
     } 
 }

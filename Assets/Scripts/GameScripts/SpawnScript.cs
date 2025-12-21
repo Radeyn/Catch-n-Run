@@ -139,7 +139,6 @@
             
             }
         
-        
         private void StopSpawning()
         {
             if (playerStatus.IsDead)

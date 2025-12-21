@@ -4,16 +4,15 @@ using UnityEngine.Pool;
 public class FruitPool : MonoBehaviour
 {
     [SerializeField] Fruit[] littleFruitPrefab;
-   // [SerializeField] Transform[] spawnPoints;
 
     [SerializeField] Score score;
     [SerializeField] PlayerStatus player;
 
-    public ObjectPool<Fruit> _littleFruitObjectPool;
+    public ObjectPool<Fruit> _fruitObjectPool;
 
     private void Start()
     {
-        _littleFruitObjectPool = new ObjectPool<Fruit>(
+        _fruitObjectPool = new ObjectPool<Fruit>(
             CreateLittleFruit,
             EnableFruit,
             DisableFruit,
@@ -27,19 +26,19 @@ public class FruitPool : MonoBehaviour
     private Fruit CreateLittleFruit()
     {
         int index = Random.Range(0, littleFruitPrefab.Length);
-        Fruit littleFruit = Instantiate(littleFruitPrefab[index]);
-        GameObject littleFruitObj = littleFruit.gameObject;
-        littleFruit.SetFruit(this);
-        littleFruit.SetReferences(score);
-        littleFruit.SetPlayer(player);
-        littleFruitObj.SetActive(false);
+        Fruit fruit = Instantiate(littleFruitPrefab[index]);
+        GameObject fruitObj = fruit.gameObject;
+        fruit.SetFruit(this);
+        fruit.SetReferences(score);
+        fruit.SetPlayer(player);
+        fruitObj.SetActive(false);
 
-        return littleFruit;
+        return fruit;
     }
 
     public Fruit GetLittleFruitFromPool()
     {
-        return _littleFruitObjectPool.Get();
+        return _fruitObjectPool.Get();
     }
     public void EnableFruit(Fruit fruit)
     {
