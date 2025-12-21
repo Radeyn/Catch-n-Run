@@ -1,32 +1,46 @@
-using UnityEngine;
+﻿using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
 
-public class BigFruit : MonoBehaviour
+public class Fruit : MonoBehaviour
 {
     private Score _score;
     private PlayerStatus player;
     private Rigidbody2D _rigidbody2D;
-    private int scoreValue = 50;
-    [SerializeField] Color textColor;
+    private FruitPool _littleFruitSpawner;
+    private int scoreValue = 40;
+
+    
     [SerializeField] GameObject floatingTextPrefab;
+    [SerializeField] Color textColor;
+
     private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _rigidbody2D.angularVelocity = 200f;
-        
+
     }
     
     public void SetReferences(Score score)
     {
         _score = score;
     }
+
     public void SetPlayer(PlayerStatus playerStatus)
     {
         player = playerStatus;
     }
-    private void ShowFloatingText()
+
+    public void SetFruit(FruitPool littleFruitSpawner)
     {
-        var text =  Instantiate(floatingTextPrefab, player.transform.position, Quaternion.identity);
+        _littleFruitSpawner = littleFruitSpawner;
+    }
+
+    private void InstantiateFloatingText()
+    {
+        var text = Instantiate(floatingTextPrefab, player.transform.position, Quaternion.identity);
+
         text.GetComponent<TextMeshPro>().text = "+" + scoreValue.ToString();
         text.GetComponent<TextMeshPro>().color = textColor;
     }
@@ -36,20 +50,19 @@ public class BigFruit : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             _score.AddScore(scoreValue);
-            ShowFloatingText();
-            gameObject.SetActive(false);
-            
+            _littleFruitSpawner._littleFruitObjectPool.Release(this);
+            InstantiateFloatingText();
+
         } 
         
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            gameObject.SetActive(false);
+            _littleFruitSpawner._littleFruitObjectPool.Release(this);
         }
 
         else if (collision.gameObject.CompareTag("Floor"))
         {
-            gameObject.SetActive(false);
+            _littleFruitSpawner._littleFruitObjectPool.Release(this);
         }
-    }
-
+    } 
 }

@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using UnityEngine.Pool;
 
 public class ObjectPool : MonoBehaviour
 {
@@ -14,14 +12,11 @@ public class ObjectPool : MonoBehaviour
     int inactiveObjCount = 0;
     void Awake()
     {
-        for (int i = 0; i < objectPoolSize; i++) 
-        {
-            
-            int randomIndex = Random.Range(0, objectPrefabs.Count);
-            
-            GameObject newObject = Instantiate(objectPrefabs[randomIndex]);
-            newObject.SetActive(false);
-            objectPool.Add(newObject);
+        foreach (var prefab in objectPrefabs)
+        {    
+           GameObject newObject = Instantiate(prefab);
+           newObject.SetActive(false);
+           objectPool.Add(newObject); 
         }
     }
 

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3225095554534872767}
   - component: {fileID: 7289921429688818163}
-  - component: {fileID: 2668630378539111137}
   - component: {fileID: 282042563351527165}
   - component: {fileID: 7072816480984032757}
+  - component: {fileID: -7000333094830873505}
   m_Layer: 0
   m_Name: Melon
   m_TagString: Fruit
@@ -93,20 +93,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2668630378539111137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1366606311605497538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b794c8050cbd26d48bc4c7703a32bd7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BigFruit
-  textColor: {r: 0.7803922, g: 0.40000004, b: 0.7411765, a: 1}
-  floatingTextPrefab: {fileID: 1091902294112432257, guid: 33b9b1e4386f34049b2c5c1dcd452e0e, type: 3}
 --- !u!50 &282042563351527165
 Rigidbody2D:
   serializedVersion: 5
@@ -133,7 +119,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 1
+  m_Constraints: 5
 --- !u!61 &7072816480984032757
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -180,3 +166,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.1435665, y: 0.7732168}
   m_EdgeRadius: 0
+--- !u!114 &-7000333094830873505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366606311605497538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6315666d53a87a4ab67995599b73a43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Fruit
+  floatingTextPrefab: {fileID: 1091902294112432257, guid: 33b9b1e4386f34049b2c5c1dcd452e0e, type: 3}
+  textColor: {r: 0.7803922, g: 0.40000004, b: 0.7411765, a: 1}

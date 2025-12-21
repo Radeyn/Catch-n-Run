@@ -24,6 +24,8 @@ public class SpikeBall : MonoBehaviour
 
     private void OnEnable()
     {
+        _rigidbody.AddTorque(200f);
+
         hitPlayer = false;
         closeCallGiven = false;
     }
